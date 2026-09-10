@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-ci.txt
+
+      - name: Install validation dependencies
+        run: python -m pip install -r requirements-ci.txt
+
+      - name: Project lint
+        run: python scripts/validate-project.py
+
+      - name: Validate schemas
+        run: python scripts/validate-schemas.py
+
+      - name: Research and source tests
+        run: python scripts/run-research-source-tests.py
+
+      - name: Strategic derivation tests
+        run: python scripts/run-strategic-derivation-tests.py
+
+      - name: End-to-end tests
+        run: python scripts/run-end-to-end-tests.py
+
+      - name: Runtime parity
+        run: python scripts/validate-runtime-parity.py
+
+      - name: Source hygiene before build
+        run: python scripts/validate-hygiene.py
+
+      - name: Build Chat ZIP
+        run: python scripts/build-chat-zip.py
+
+      - name: Build Custom GPT ZIP
+        run: python scripts/build-custom-gpt.py
+
+      - name: Validate distribution artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION="$(cat VERSION)"
+          test -s "dist/it-strategen-myndigheter-chat-${VERSION}.zip"
+          test -s "dist/it-strategen-myndigheter-chat-${VERSION}.zip.sha256"
+          test -s "dist/it-strategen-myndigheter-custom-gpt-${VERSION}.zip"
+          test -s "dist/it-strategen-myndigheter-custom-gpt-${VERSION}.zip.sha256"
+          unzip -t "dist/it-strategen-myndigheter-chat-${VERSION}.zip"
+          unzip -t "dist/it-strategen-myndigheter-custom-gpt-${VERSION}.zip"
+          (cd dist && sha256sum -c "it-strategen-myndigheter-chat-${VERSION}.zip.sha256")
+          (cd dist && sha256sum -c "it-strategen-myndigheter-custom-gpt-${VERSION}.zip.sha256")
+
+      - name: Upload runtime artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: it-strategen-myndigheter-${{ github.sha }}
+          path: |
+            dist/*.zip
+            dist/*.sha256
+          if-no-files-found: error
+          retention-days: 14

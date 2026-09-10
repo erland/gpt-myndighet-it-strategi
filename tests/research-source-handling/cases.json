@@ -1,0 +1,78 @@
+[
+  {
+    "id": "RS01_WELL_DOCUMENTED_AGENCY",
+    "title": "Väl dokumenterad större myndighet",
+    "scenario": "Instruktion, aktuellt regleringsbrev, årsredovisning, budgetunderlag, beslutad strategi och extern granskning finns tillgängliga.",
+    "expect": {
+      "research_ready": true,
+      "source_priority": ["binding", "official_primary", "independent_secondary"],
+      "must_record_gap": false,
+      "must_triangulate_major_claims": true
+    }
+  },
+  {
+    "id": "RS02_SMALL_AGENCY_FEW_DOCUMENTS",
+    "title": "Mindre myndighet med få offentliga dokument",
+    "scenario": "Instruktion, regleringsbrev och årsredovisning finns, men inget offentligt budgetunderlag, ingen publicerad IT-strategi och få externa granskningar.",
+    "expect": {
+      "research_ready": true,
+      "must_record_gap": true,
+      "gap_not_automatically_blocking": true,
+      "must_not_invent_missing_state": true
+    }
+  },
+  {
+    "id": "RS03_CONFLICTING_SOURCES",
+    "title": "Motstridiga källor",
+    "scenario": "Myndighetens webbtext beskriver ett initiativ som genomfört medan en senare extern granskning visar att införandet bara är delvis genomfört.",
+    "expect": {
+      "must_classify_conflict": true,
+      "must_compare_dates": true,
+      "must_compare_authority_for_claim": true,
+      "must_preserve_unresolved_conflict": true
+    }
+  },
+  {
+    "id": "RS04_OLD_STRATEGY_NEW_STEERING",
+    "title": "Äldre strategi kontra nyare regleringsbrev",
+    "scenario": "En fem år gammal digitaliseringsstrategi anger en riktning som delvis motsägs av ett aktuellt regleringsbrev och nya regeringsuppdrag.",
+    "expect": {
+      "newer_not_automatically_stronger": true,
+      "binding_current_steering_overrides_old_internal_direction": true,
+      "must_mark_old_strategy_as_partly_current_or_historical": true
+    }
+  },
+  {
+    "id": "RS05_MISSING_BUDGET_BASIS",
+    "title": "Saknat budgetunderlag",
+    "scenario": "Budgetunderlag kan inte hittas trots att ekonomiska förutsättningar är viktiga för strategin.",
+    "expect": {
+      "must_record_gap": true,
+      "gap_importance": "material",
+      "must_reduce_confidence_in_capacity_conclusions": true,
+      "must_continue_best_effort": true
+    }
+  },
+  {
+    "id": "RS06_WEAK_THIRD_PARTY_SOURCE",
+    "title": "Osäker tredjepartskälla",
+    "scenario": "En leverantörsrapport hävdar att myndigheten bör byta plattform men någon myndighetsspecifik primärevidens saknas.",
+    "expect": {
+      "must_treat_as_complementary": true,
+      "must_consider_source_interest": true,
+      "must_not_create_agency_specific_goal": true,
+      "must_seek_primary_or_independent_support": true
+    }
+  },
+  {
+    "id": "RS07_FAST_MOVING_IT_TREND",
+    "title": "Aktuell snabbt föränderlig IT-trend",
+    "scenario": "En AI-relaterad trend kan vara relevant men källorna är snabbt föränderliga och flera äldre analyser cirkulerar.",
+    "expect": {
+      "must_prefer_current_sources": true,
+      "must_assess_maturity": true,
+      "must_link_to_agency_need": true,
+      "trend_alone_cannot_drive_strategy": true
+    }
+  }
+]

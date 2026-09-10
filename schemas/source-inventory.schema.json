@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Source inventory item",
+  "description": "En källa som inventerats för myndighetsanalysen.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_group": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "source_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "publisher": {
+      "type": "string",
+      "minLength": 1
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "publication_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "valid_from": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "valid_to": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "authority": {
+      "type": "string",
+      "enum": [
+        "binding",
+        "official_primary",
+        "official_secondary",
+        "independent_secondary",
+        "industry",
+        "unknown"
+      ]
+    },
+    "currency": {
+      "type": "string",
+      "enum": [
+        "current",
+        "partly_current",
+        "historical",
+        "unknown"
+      ]
+    },
+    "direct_relevance": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "unknown"
+      ]
+    },
+    "independence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "not_applicable",
+        "unknown"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "found",
+        "reviewed",
+        "missing",
+        "not_applicable"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "source_group",
+    "source_type",
+    "authority",
+    "currency",
+    "direct_relevance",
+    "status"
+  ]
+}

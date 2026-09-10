@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Strategic IT issue",
+  "description": "Prioriterad strategisk IT-fråga, gap, risk, möjlighet eller beroende.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "issue_type": {
+      "type": "string",
+      "enum": [
+        "strategic_problem",
+        "capability_gap",
+        "opportunity",
+        "risk",
+        "dependency"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "root_cause_or_gap": {
+      "type": "string",
+      "minLength": 1
+    },
+    "driver_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      },
+      "minItems": 1
+    },
+    "mission_significance": {
+      "type": "string",
+      "enum": [
+        "very_high",
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "impact": {
+      "type": "string",
+      "enum": [
+        "very_high",
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "urgency": {
+      "type": "string",
+      "enum": [
+        "immediate",
+        "near",
+        "medium",
+        "long",
+        "unknown"
+      ]
+    },
+    "cross_cutting_reach": {
+      "type": "string",
+      "enum": [
+        "enterprise",
+        "multi_domain",
+        "local",
+        "unknown"
+      ]
+    },
+    "evidence_strength": {
+      "type": "string",
+      "enum": [
+        "strong",
+        "moderate",
+        "weak",
+        "unknown"
+      ]
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low",
+        "unprioritized"
+      ]
+    },
+    "existing_response": {
+      "type": "string"
+    },
+    "residual_gap": {
+      "type": "string"
+    },
+    "solution_neutral": {
+      "type": "boolean",
+      "const": true
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "issue_type",
+    "description",
+    "root_cause_or_gap",
+    "evidence_ids",
+    "priority",
+    "solution_neutral"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Strategic driver",
+  "description": "Verksamhets- eller styrningsdrivkraft med koppling till evidens.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "driver_type": {
+      "type": "string",
+      "enum": [
+        "mission",
+        "governance",
+        "business_goal",
+        "change_pressure",
+        "economic_capacity",
+        "external_dependency",
+        "environment_signal"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      },
+      "minItems": 1
+    },
+    "strength": {
+      "type": "string",
+      "enum": [
+        "very_high",
+        "high",
+        "medium",
+        "low",
+        "unknown"
+      ]
+    },
+    "time_horizon": {
+      "type": "string",
+      "enum": [
+        "near",
+        "medium",
+        "long",
+        "continuous",
+        "undetermined"
+      ]
+    },
+    "implications": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "driver_type",
+    "description",
+    "evidence_ids",
+    "strength",
+    "time_horizon"
+  ]
+}

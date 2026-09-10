@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Strategic transformation",
+  "description": "Strategisk förflyttning mellan nuläge och önskat läge.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "current_state": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_state": {
+      "type": "string",
+      "minLength": 1
+    },
+    "transformation_statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_effects": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "goal_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      },
+      "minItems": 1
+    },
+    "choice_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      },
+      "minItems": 1
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low",
+        "unprioritized"
+      ]
+    },
+    "time_horizon": {
+      "type": "string",
+      "enum": [
+        "near",
+        "medium",
+        "long",
+        "continuous",
+        "undetermined"
+      ]
+    },
+    "sequence_role": {
+      "type": "string",
+      "enum": [
+        "enabler",
+        "parallel",
+        "dependent",
+        "standalone",
+        "unknown"
+      ]
+    },
+    "existing_initiative_treatment": {
+      "type": "string",
+      "enum": [
+        "new",
+        "accelerate",
+        "scale",
+        "consolidate",
+        "correct",
+        "institutionalize",
+        "continue",
+        "unknown"
+      ]
+    },
+    "initiative_areas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "project_level_detail": {
+      "type": "boolean",
+      "const": false
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "current_state",
+    "target_state",
+    "transformation_statement",
+    "expected_effects",
+    "goal_ids",
+    "evidence_ids",
+    "priority",
+    "time_horizon",
+    "sequence_role",
+    "existing_initiative_treatment",
+    "project_level_detail"
+  ]
+}
