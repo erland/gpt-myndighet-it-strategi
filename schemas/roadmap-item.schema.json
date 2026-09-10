@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Roadmap item",
+  "description": "Strategisk sekvensering av en förflyttning eller milstolpe.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "item_type": {
+      "type": "string",
+      "enum": [
+        "transformation",
+        "strategic_milestone",
+        "review_point"
+      ]
+    },
+    "transformation_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      }
+    },
+    "goal_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      },
+      "minItems": 1
+    },
+    "time_horizon": {
+      "type": "string",
+      "enum": [
+        "near",
+        "medium",
+        "long",
+        "continuous",
+        "undetermined"
+      ]
+    },
+    "depends_on": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      }
+    },
+    "enables": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      }
+    },
+    "milestone_description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capacity_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "indicators": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "indicator_type": {
+            "type": "string",
+            "enum": [
+              "effect",
+              "capability_maturity",
+              "execution",
+              "risk_dependency"
+            ]
+          },
+          "measurement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "baseline": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "target": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "baseline_status": {
+            "type": "string",
+            "enum": [
+              "known",
+              "to_be_established",
+              "not_required"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "indicator_type",
+          "measurement",
+          "baseline_status"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "item_type",
+    "goal_ids",
+    "time_horizon",
+    "milestone_description"
+  ]
+}

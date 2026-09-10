@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Strategy status",
+  "description": "Runtime-status för det 15-fasiga strategiflödet.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "agency_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agency_identifier": {
+      "type": "string"
+    },
+    "current_phase": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 15
+    },
+    "phase_status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "blocked",
+        "complete"
+      ]
+    },
+    "completed_phases": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 15
+      }
+    },
+    "open_source_gap_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      }
+    },
+    "blocking_issues": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "next_recommended_phase": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 15
+    },
+    "next_action": {
+      "type": "string"
+    },
+    "gate_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "research_to_analysis": {
+          "type": "string",
+          "enum": [
+            "not_ready",
+            "ready",
+            "passed"
+          ]
+        },
+        "analysis_to_strategy": {
+          "type": "string",
+          "enum": [
+            "not_ready",
+            "ready",
+            "passed"
+          ]
+        },
+        "strategy_to_report": {
+          "type": "string",
+          "enum": [
+            "not_ready",
+            "ready",
+            "passed"
+          ]
+        }
+      },
+      "required": [
+        "research_to_analysis",
+        "analysis_to_strategy",
+        "strategy_to_report"
+      ]
+    }
+  },
+  "required": [
+    "agency_name",
+    "current_phase",
+    "phase_status",
+    "completed_phases",
+    "open_source_gap_ids",
+    "blocking_issues",
+    "gate_status"
+  ]
+}

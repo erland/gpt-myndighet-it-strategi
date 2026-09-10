@@ -1,0 +1,170 @@
+[
+  {
+    "id": "SD01_IRRELEVANT_TREND_REJECTED",
+    "title": "Trend utan myndighetskoppling väljs bort",
+    "scenario": "En aktuell AI-trend är väl belagd i branschen men det finns ingen tydlig koppling till myndighetens uppdrag, mål, dokumenterade gap eller förändringstryck.",
+    "expect": {
+      "must_not_create_strategic_goal": true,
+      "must_not_create_strategic_choice": true,
+      "allowed_treatment": [
+        "monitor",
+        "low_priority"
+      ],
+      "must_state_missing_agency_link": true
+    }
+  },
+  {
+    "id": "SD02_BUSINESS_NEED_TO_IT_GOAL",
+    "title": "Verksamhetskrav kan härledas till IT-strategiskt mål",
+    "scenario": "Bindande styrning och verksamhetsmål kräver snabbare och säkrare digitalt informationsutbyte med flera externa aktörer. Nulägesanalysen visar dokumenterade begränsningar i interoperabilitet.",
+    "expect": {
+      "must_formulate_capability_or_effect_goal": true,
+      "must_trace_goal_to_strategic_issue": true,
+      "must_trace_issue_to_evidence": true,
+      "goal_must_be_solution_neutral": true
+    }
+  },
+  {
+    "id": "SD03_NO_PRODUCT_WITHOUT_EVIDENCE",
+    "title": "Produktnamn uppstår inte utan motivering",
+    "scenario": "Underlaget visar behov av förbättrad integrationsförmåga men innehåller ingen analys som jämför specifika produkter eller leverantörer.",
+    "expect": {
+      "must_not_recommend_specific_product": true,
+      "must_keep_choice_at_strategy_level": true,
+      "product_selection_requires_separate_analysis": true
+    }
+  },
+  {
+    "id": "SD04_GOAL_NOT_INITIATIVE",
+    "title": "Mål blandas inte ihop med initiativ",
+    "scenario": "Analysen visar behov av bättre datatillgänglighet. Ett förslag formuleras som 'Införa gemensam dataplattform'.",
+    "expect": {
+      "must_reject_solution_as_goal": true,
+      "must_reformulate_goal_as_effect_or_capability": true,
+      "platform_may_later_be_choice_or_initiative": true
+    }
+  },
+  {
+    "id": "SD05_TRACE_OBSERVATION_TO_RECOMMENDATION",
+    "title": "Observation kan följas till rekommendation",
+    "scenario": "Flera primärkällor visar ökande krav på digitalt informationsutbyte. Analysen identifierar interoperabilitet som strategiskt gap och föreslår ett mål samt ett vägval.",
+    "expect": {
+      "must_have_complete_trace_chain": true,
+      "required_chain": [
+        "source",
+        "evidence",
+        "strategic_issue",
+        "it_strategic_goal",
+        "strategic_choice"
+      ],
+      "must_preserve_source_links": true
+    }
+  },
+  {
+    "id": "SD06_UNCERTAINTY_PROPAGATES",
+    "title": "Osäkerhet förs vidare till slutsatsen",
+    "scenario": "Teknisk skuld misstänks vara ett betydande hinder men stöds endast av indirekta offentliga uppgifter och någon teknisk nulägesinventering är inte tillgänglig.",
+    "expect": {
+      "must_not_present_inferred_state_as_fact": true,
+      "must_propagate_uncertainty": true,
+      "must_reduce_recommendation_confidence": true,
+      "may_create_verification_action": true
+    }
+  },
+  {
+    "id": "SD07_SYMPTOM_TO_ROOT_GAP",
+    "title": "Symptom konsolideras till bakomliggande strategiskt gap",
+    "scenario": "Flera dokument beskriver manuella överlämningar, dubbelregistrering och långsam informationsdelning mellan verksamhetsdelar.",
+    "expect": {
+      "must_not_create_one_goal_per_symptom": true,
+      "must_identify_underlying_gap": true,
+      "must_deduplicate_related_issues": true
+    }
+  },
+  {
+    "id": "SD08_CHOICE_REQUIRES_ALTERNATIVES",
+    "title": "Större vägval kräver alternativanalys",
+    "scenario": "Ett strategiskt gap skulle kunna hanteras genom centralisering, federerad styrning eller en hybridmodell.",
+    "expect": {
+      "must_compare_relevant_alternatives": true,
+      "must_record_tradeoffs": true,
+      "must_link_recommended_choice_to_goals": true,
+      "high_irreversibility_requires_stronger_evidence": true
+    }
+  },
+  {
+    "id": "SD09_EXISTING_INITIATIVE_NOT_REINVENTED",
+    "title": "Pågående initiativ återuppfinns inte",
+    "scenario": "Myndigheten har redan ett beslutat program för förbättrat informationsutbyte som adresserar delar av det identifierade gapet.",
+    "expect": {
+      "must_account_for_existing_response": true,
+      "must_identify_residual_gap": true,
+      "must_not_propose_duplicate_initiative": true,
+      "allowed_recommendations": [
+        "accelerate",
+        "scale",
+        "consolidate",
+        "correct",
+        "institutionalize",
+        "continue"
+      ]
+    }
+  },
+  {
+    "id": "SD10_CAPACITY_CONSTRAINS_AMBITION",
+    "title": "Kapacitet påverkar strategisk ambition",
+    "scenario": "Ett vägval har stark målkoppling men kräver betydligt mer kompetens och förändringskapacitet än myndigheten dokumenterat kan mobilisera på kort sikt.",
+    "expect": {
+      "must_not_ignore_capacity_constraint": true,
+      "must_adjust_scope_sequence_or_horizon": true,
+      "must_preserve_goal_traceability": true
+    }
+  },
+  {
+    "id": "SD11_MATURE_CAPABILITY_NOT_REINTRODUCED",
+    "title": "Mogen förmåga ska inte återinföras",
+    "scenario": "Myndigheten har dokumenterad AI-infrastruktur, etablerad användning och uppmätta effekter. Omvärlden visar fortsatt snabb AI-utveckling.",
+    "expect": {
+      "must_not": "formulate goal as establish AI capability from scratch",
+      "must": "assess scale_govern_consolidate_accelerate_or_institutionalize",
+      "trace_existing_maturity": true
+    }
+  },
+  {
+    "id": "SD12_SMALL_AGENCY_PUBLIC_EVIDENCE_CEILING",
+    "title": "Liten myndighet med tunn IT-dokumentation",
+    "scenario": "En mindre myndighet har tydlig styrning, årsredovisning och nya uppdrag men få offentliga dokument om intern IT-arkitektur eller IT-strategi.",
+    "expect": {
+      "must_not": "infer missing internal capability from missing public documents",
+      "must": "continue at supported abstraction level and register evidence boundary",
+      "allow_synthesis_with_gaps": true
+    }
+  },
+  {
+    "id": "SD13_DOMAIN_TECH_NOT_INTERNAL_ADOPTION",
+    "title": "Teknik i sakuppdrag är inte automatiskt intern teknikstrategi",
+    "scenario": "AI förändrar snabbt myndighetens reglerings- eller analysdomän, men underlaget säger inget om intern AI-användning.",
+    "expect": {
+      "must": "classify domain technology impact separately from internal enabler",
+      "must_not": "create internal AI adoption goal solely from domain impact"
+    }
+  },
+  {
+    "id": "SD14_EXTERNAL_INTEROPERABILITY_AS_DRIVER",
+    "title": "Bindande interoperabilitetskrav är strategisk drivkraft",
+    "scenario": "EU-reglering kräver nya gränssnitt, informationsutbyte och samordning med andra myndigheter.",
+    "expect": {
+      "must": "treat external interoperability requirement as first-class strategic driver",
+      "must_not": "leave requirement only as generic environment trend"
+    }
+  },
+  {
+    "id": "SD15_SECURITY_PUBLIC_EVIDENCE_CEILING",
+    "title": "Säkerhetskänslig myndighet utan offentlig arkitekturdetalj",
+    "scenario": "Myndigheten beskriver informationsbehov, säkerhetskrav och digital utveckling men publicerar inte detaljerad intern arkitektur eller systemportfölj.",
+    "expect": {
+      "must_not": "infer weak architecture or missing controls from non-disclosure",
+      "must": "state verification need and keep recommendations at supported abstraction"
+    }
+  }
+]

@@ -1,0 +1,39 @@
+schema_version: 1
+runtime:
+  id: it-strategen-myndigheter-chat
+  name: IT-strategen för myndigheter
+  distribution: chat_zip
+  language: sv
+  version: 0.1.0
+entrypoint:
+  human: START-HERE.md
+  instructions: assistant/instructions.md
+canonical:
+  source_in_project: src/instructions/system.md
+  packaged_as: assistant/instructions.md
+knowledge:
+  root: knowledge
+  required_for_core_behavior: false
+  files:
+  - knowledge/KNOWLEDGE.md
+  - knowledge/it-strategy-method.md
+  - knowledge/swedish-agency-governance.md
+  - knowledge/source-evaluation.md
+  - knowledge/strategic-goals-and-choices.md
+  - knowledge/environment-analysis.md
+  - knowledge/report-quality.md
+schemas:
+  root: schemas
+  format: json_schema_draft_2020_12
+  count: 11
+capabilities:
+  web_research:
+    required: true
+  file_handling:
+    recommended: true
+  data_analysis:
+    recommended: true
+portability:
+  project_repository_required: false
+  external_runtime_files_required: false
+  current_information_hardcoded: false

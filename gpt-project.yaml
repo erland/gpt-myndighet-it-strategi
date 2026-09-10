@@ -1,0 +1,121 @@
+schema_version: 1
+project:
+  id: it-strategen-myndigheter
+  name: IT-strategen för myndigheter
+  language: sv
+  version: 0.1.0
+analysis:
+  profile: workflow_research_heavy
+  rationale: Research-heavy flerstegsflöde med höga krav på källvärdering, evidens
+    och spårbarhet.
+instructions:
+  canonical: src/instructions/system.md
+  core_contract:
+    enabled: true
+    required_markers:
+    - Myndighetsspecifik evidens väger tyngre än generell IT-trendinformation.
+    - Observation → källa → betydelse → strategisk konsekvens → rekommendation.
+    - Bygg strategin stegvis
+    required_runtime_dependencies: []
+    max_required_file_hops: 1
+    knowledge_may_not_be_required_for_core_behavior: true
+knowledge_architecture:
+  canonical_root: knowledge
+  status: implemented
+structure:
+  instructions:
+    path: src/instructions
+  knowledge:
+    path: knowledge
+  schemas:
+    path: schemas
+  scripts:
+    path: scripts
+  tests:
+    path: tests
+  evals:
+    path: evals
+  templates:
+    path: templates
+  distributions:
+    path: distributions
+runtime:
+  primary: none
+  chat_zip:
+    enabled: true
+    status: validated
+    entrypoint: START-HERE.md
+    artifact: dist/it-strategen-myndigheter-chat-0.1.0.zip
+    manifest: distributions/chat/runtime/runtime-manifest.yaml
+  custom_gpt:
+    enabled: true
+    status: validated
+    instruction:
+      mode: compact
+      max_characters: 8000
+    knowledge:
+      max_files: 20
+      strategy: curated
+    artifact: dist/it-strategen-myndigheter-custom-gpt-0.1.0.zip
+    config: distributions/custom-gpt/runtime/custom-gpt-config.yaml
+    knowledge_count: 7
+capabilities:
+  web_research:
+    required: true
+    reason: Myndighetsunderlag och IT-omvärld är tidskänsliga och myndighetsspecifika.
+  data_analysis:
+    recommended: true
+    reason: Ekonomiska flerårsdata och strukturerade underlag kan behöva analyseras.
+  image_generation:
+    required: false
+  file_handling:
+    recommended: true
+development:
+  plan: docs/development-plan.md
+  status: project-status.yaml
+ci:
+  enabled: true
+  status: implemented
+  workflow: .github/workflows/ci.yml
+release:
+  github:
+    enabled: true
+    status: implemented
+    version_source: github_release_tag
+    workflow: .github/workflows/release.yml
+    build_script: scripts/build-release.py
+    artifacts:
+    - project_zip
+    - chat_zip
+    - custom_gpt_zip
+    - sha256_checksums
+schemas:
+  path: schemas
+  status: implemented
+  format: json_schema_draft_2020_12
+  count: 11
+  runtime_role: structured_working_contracts
+release_readiness:
+  status: pass
+  blocking_issues: 0
+  warnings: 0
+  report: docs/release-readiness-report.md
+  validated_rc_tag: v0.1.0-rc.2
+pilot_review:
+  status: pass
+  step: 31
+  cases:
+  - Skatteverket
+  - Mediemyndigheten
+  - Läkemedelsverket
+  - Polismyndigheten
+  method_adjustments: 5
+  blocking_findings: 0
+  report: docs/pilot-review-step-31.md
+stable_release:
+  status: pass
+  version: 0.1.0
+  source_candidate: 0.1.0-rc.2
+  blocking_issues: 0
+  warnings: 0
+  report: docs/stable-release-report-0.1.0.md

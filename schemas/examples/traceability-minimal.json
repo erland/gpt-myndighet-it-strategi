@@ -1,0 +1,64 @@
+{
+  "source": {
+    "id": "SRC_01",
+    "title": "Exempel på styrkälla",
+    "source_group": 1,
+    "source_type": "regleringsbrev",
+    "authority": "binding",
+    "currency": "current",
+    "direct_relevance": "high",
+    "status": "reviewed"
+  },
+  "evidence": {
+    "id": "EVI_01",
+    "claim_type": "fact",
+    "observation": "Myndigheten har ett uttryckligt krav på ökat digitalt informationsutbyte.",
+    "source_ids": [
+      "SRC_01"
+    ],
+    "evidence_strength": "strong",
+    "inference_strength": "direct",
+    "counter_evidence": [],
+    "uncertainties": [],
+    "tags": [
+      "informationsutbyte"
+    ]
+  },
+  "issue": {
+    "id": "ISS_01",
+    "name": "Otillräcklig interoperabilitetsförmåga",
+    "issue_type": "capability_gap",
+    "description": "Förmågan behöver utvecklas för att möta styrningen.",
+    "root_cause_or_gap": "Otillräckligt standardiserat informationsutbyte.",
+    "driver_ids": [],
+    "evidence_ids": [
+      "EVI_01"
+    ],
+    "priority": "high",
+    "solution_neutral": true
+  },
+  "goal": {
+    "id": "GOAL_01",
+    "name": "Stärkt interoperabilitet",
+    "goal_statement": "Öka förmågan till säkert och standardiserat digitalt informationsutbyte.",
+    "desired_effect_or_capability": "Interoperabelt informationsutbyte med relevanta aktörer.",
+    "strategic_issue_ids": [
+      "ISS_01"
+    ],
+    "business_goal_or_governance_refs": [
+      "Regleringskrav"
+    ],
+    "evidence_ids": [
+      "EVI_01"
+    ],
+    "priority": "high",
+    "time_horizon": "medium",
+    "measurement_intent": [
+      "Andel prioriterade utbyten som följer gemensamma informationskontrakt."
+    ],
+    "baseline_status": "to_be_established",
+    "dependencies": [],
+    "conflicts_or_tradeoffs": [],
+    "solution_neutral": true
+  }
+}

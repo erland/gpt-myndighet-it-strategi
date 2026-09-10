@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Evidence item",
+  "description": "Spårbar evidenspost som håller isär observation och tolkning.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+    },
+    "claim_type": {
+      "type": "string",
+      "enum": [
+        "fact",
+        "analysis",
+        "assumption",
+        "uncertainty"
+      ]
+    },
+    "observation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      },
+      "minItems": 1
+    },
+    "meaning": {
+      "type": "string"
+    },
+    "evidence_strength": {
+      "type": "string",
+      "enum": [
+        "strong",
+        "moderate",
+        "weak",
+        "unknown"
+      ]
+    },
+    "inference_strength": {
+      "type": "string",
+      "enum": [
+        "direct",
+        "supported",
+        "tentative",
+        "not_applicable"
+      ]
+    },
+    "counter_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "id",
+    "claim_type",
+    "observation",
+    "source_ids",
+    "evidence_strength",
+    "inference_strength"
+  ]
+}

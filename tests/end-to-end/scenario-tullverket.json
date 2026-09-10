@@ -1,0 +1,648 @@
+{
+  "scenario_id": "E2E01_TULLVERKET",
+  "agency": "Tullverket",
+  "as_of": "2026-09-10",
+  "purpose": "Referensscenario som verifierar hela strategikedjan med verkliga offentliga källor. Det är ett testunderlag, inte en beslutad IT-strategi för Tullverket.",
+  "sources": [
+    {
+      "id": "SRC-001",
+      "title": "Förordning (2016:1332) med instruktion för Tullverket",
+      "source_group": 1,
+      "source_type": "agency_instruction",
+      "authority": "binding",
+      "currency": "current",
+      "direct_relevance": "high",
+      "independence": "not_applicable",
+      "publisher": "Sveriges riksdag / Regeringskansliet",
+      "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/forordning-20161332-med-instruktion-for_sfs-2016-1332/",
+      "status": "reviewed"
+    },
+    {
+      "id": "SRC-002",
+      "title": "Tullverkets årsredovisning 2025",
+      "source_group": 2,
+      "source_type": "annual_report",
+      "authority": "official_primary",
+      "currency": "current",
+      "direct_relevance": "high",
+      "independence": "low",
+      "publication_date": "2026-02-22",
+      "publisher": "Tullverket",
+      "url": "https://www.tullverket.se/download/18.4776b304199f1ed58ccbff8f/1772036389845/%C3%85rsredovisning%202025.pdf",
+      "status": "reviewed"
+    },
+    {
+      "id": "SRC-003",
+      "title": "Tullverkets budgetunderlag 2026–2028",
+      "source_group": 2,
+      "source_type": "budget_basis",
+      "authority": "official_primary",
+      "currency": "current",
+      "direct_relevance": "high",
+      "independence": "low",
+      "publication_date": "2025-03-01",
+      "publisher": "Tullverket",
+      "url": "https://www.tullverket.se/download/18.7822c369195184848931d2/1739966850070/Tullverket%20Budgetunderlag%202026-2028.pdf",
+      "status": "reviewed"
+    },
+    {
+      "id": "SRC-004",
+      "title": "Förändringar för lågvärdeförsändelser från den 1 juli 2026",
+      "source_group": 2,
+      "source_type": "operational_regulatory_update",
+      "authority": "official_primary",
+      "currency": "current",
+      "direct_relevance": "medium",
+      "independence": "low",
+      "publication_date": "2026-05-06",
+      "publisher": "Tullverket",
+      "url": "https://www.tullverket.se/aktuellt/nyheter/nyheterforforetag/nyheter/forandringarforlagvardeforsandelserfranden1juli2026.5.389ee53119d71f234982b5ce.html",
+      "status": "reviewed"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "EVD-001",
+      "claim_type": "fact",
+      "observation": "Tullverkets formella uppdrag omfattar korrekt uppbörd samt övervakning och kontroll av trafik till och från Sverige så att regler om in- och utförsel följs.",
+      "source_ids": [
+        "SRC-001"
+      ],
+      "evidence_strength": "strong",
+      "inference_strength": "direct",
+      "meaning": "IT-strategin måste stödja både handels-/uppbördsflöden och kontrollverksamhet."
+    },
+    {
+      "id": "EVD-002",
+      "claim_type": "fact",
+      "observation": "Budgetunderlaget beskriver behov av stärkt digital förmåga, ett betydande tekniklyft i operativ verksamhet, mer informationsutbyte, hantering av stora datamängder och robusta säkra system.",
+      "source_ids": [
+        "SRC-003"
+      ],
+      "evidence_strength": "strong",
+      "inference_strength": "direct",
+      "meaning": "Digital förmåga, data och säkert informationsutbyte är dokumenterade verksamhetsnära utvecklingsbehov."
+    },
+    {
+      "id": "EVD-003",
+      "claim_type": "fact",
+      "observation": "Årsredovisningen beskriver komplex digital kommunikation mellan medlemsländer, digitalisering av brottshantering, arbete med AI samt förberedelser för EU:s tullreform och en framtida EU-tulldatacentral.",
+      "source_ids": [
+        "SRC-002"
+      ],
+      "evidence_strength": "strong",
+      "inference_strength": "direct",
+      "meaning": "Interoperabilitet, datadelning och förändringsberedskap mot EU är långsiktigt centrala."
+    },
+    {
+      "id": "EVD-004",
+      "claim_type": "fact",
+      "observation": "Nya EU-regler för lågvärdeförsändelser började gälla den 1 juli 2026 och förändrar tullhanteringen för småpaket.",
+      "source_ids": [
+        "SRC-004"
+      ],
+      "evidence_strength": "strong",
+      "inference_strength": "direct",
+      "meaning": "Regelförändringar kan kräva snabb anpassning av digitala processer och system."
+    },
+    {
+      "id": "EVD-005",
+      "claim_type": "analysis",
+      "observation": "Kombinationen av växande informationsflöden, EU-integration och nya regler talar för att förändringsförmåga och interoperabilitet är viktigare strategiska egenskaper än enskilda teknikprodukter.",
+      "source_ids": [
+        "SRC-002",
+        "SRC-003",
+        "SRC-004"
+      ],
+      "evidence_strength": "strong",
+      "inference_strength": "supported",
+      "meaning": "Strategin bör prioritera förmågor och arkitekturegenskaper framför produktval."
+    }
+  ],
+  "drivers": [
+    {
+      "id": "DRV-001",
+      "name": "Digitalt stöd för kärnuppdraget",
+      "driver_type": "mission",
+      "description": "Uppbörd, gränskontroll och brottsbekämpning kräver tillförlitliga digitala stöd och informationsflöden.",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-002"
+      ],
+      "strength": "very_high",
+      "time_horizon": "continuous"
+    },
+    {
+      "id": "DRV-002",
+      "name": "EU-driven interoperabilitet och tullreform",
+      "driver_type": "external_dependency",
+      "description": "EU-gemensamma lösningar, informationsutbyte och tullreform driver förändringar över lång tid.",
+      "evidence_ids": [
+        "EVD-003",
+        "EVD-004"
+      ],
+      "strength": "very_high",
+      "time_horizon": "long"
+    },
+    {
+      "id": "DRV-003",
+      "name": "Stärkt digital och analytisk förmåga",
+      "driver_type": "change_pressure",
+      "description": "Myndighetens egna underlag beskriver behov av tekniklyft, större datahantering, automatisering och robusta system.",
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-003"
+      ],
+      "strength": "high",
+      "time_horizon": "medium"
+    }
+  ],
+  "issues": [
+    {
+      "id": "ISS-001",
+      "name": "Interoperabilitet och förändringsbarhet i informationsutbytet",
+      "issue_type": "capability_gap",
+      "description": "Tullverket behöver kunna anpassa och skala digitalt informationsutbyte när EU-regler, partner och informationsflöden förändras.",
+      "root_cause_or_gap": "Behov av uthållig förmåga att förändra integrations- och informationsflöden utan att varje regeländring blir en separat punktlösning.",
+      "evidence_ids": [
+        "EVD-003",
+        "EVD-004",
+        "EVD-005"
+      ],
+      "driver_ids": [
+        "DRV-002"
+      ],
+      "mission_significance": "very_high",
+      "impact": "very_high",
+      "urgency": "near",
+      "cross_cutting_reach": "enterprise",
+      "evidence_strength": "strong",
+      "priority": "critical",
+      "solution_neutral": true
+    },
+    {
+      "id": "ISS-002",
+      "name": "Skalbar data- och analysförmåga",
+      "issue_type": "capability_gap",
+      "description": "Ökande informationsmängder och avancerad analys ställer krav på en hållbar data- och analysförmåga.",
+      "root_cause_or_gap": "Behovet gäller förmågan att tillgängliggöra, bearbeta och använda data säkert och återanvändbart över flera verksamhetsområden.",
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-003"
+      ],
+      "driver_ids": [
+        "DRV-003"
+      ],
+      "mission_significance": "high",
+      "impact": "high",
+      "urgency": "near",
+      "cross_cutting_reach": "enterprise",
+      "evidence_strength": "strong",
+      "priority": "high",
+      "solution_neutral": true
+    },
+    {
+      "id": "ISS-003",
+      "name": "Robust digital förändringskapacitet",
+      "issue_type": "capability_gap",
+      "description": "Samtidiga regel-, säkerhets- och teknikförändringar kräver att digital utveckling kan genomföras snabbare utan att robusthet och förvaltning försämras.",
+      "root_cause_or_gap": "Behov av gemensamma arbetssätt och tekniska möjliggörare för kontinuerlig, säker förändring.",
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-004",
+        "EVD-005"
+      ],
+      "driver_ids": [
+        "DRV-001",
+        "DRV-003"
+      ],
+      "mission_significance": "high",
+      "impact": "high",
+      "urgency": "near",
+      "cross_cutting_reach": "enterprise",
+      "evidence_strength": "moderate",
+      "priority": "high",
+      "solution_neutral": true
+    }
+  ],
+  "goals": [
+    {
+      "id": "GOAL-001",
+      "name": "Förändringsbart digitalt informationsutbyte",
+      "goal_statement": "Tullverket ska kunna införa och förändra digitalt informationsutbyte med svenska och internationella aktörer med kortare ledtid och bibehållen spårbarhet, säkerhet och kvalitet.",
+      "desired_effect_or_capability": "Hög interoperabilitet och förändringsförmåga i informationsutbytet.",
+      "strategic_issue_ids": [
+        "ISS-001",
+        "ISS-003"
+      ],
+      "evidence_ids": [
+        "EVD-003",
+        "EVD-004",
+        "EVD-005"
+      ],
+      "priority": "critical",
+      "time_horizon": "medium",
+      "baseline_status": "to_be_established",
+      "solution_neutral": true
+    },
+    {
+      "id": "GOAL-002",
+      "name": "Tillgänglig och styrd data för operativ effekt",
+      "goal_statement": "Relevant data ska kunna användas säkert och återanvändbart för kontroll, uppbörd, brottsbekämpning och analys.",
+      "desired_effect_or_capability": "Skalbar datahantering och analys med tydlig styrning och informationssäkerhet.",
+      "strategic_issue_ids": [
+        "ISS-002"
+      ],
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-003"
+      ],
+      "priority": "high",
+      "time_horizon": "medium",
+      "baseline_status": "to_be_established",
+      "solution_neutral": true
+    },
+    {
+      "id": "GOAL-003",
+      "name": "Uthållig digital leveransförmåga",
+      "goal_statement": "Tullverket ska kunna genomföra kontinuerliga digitala förändringar i takt med regelverk och verksamhetsbehov utan att skapa ohållbar förvaltningsbörda.",
+      "desired_effect_or_capability": "Kortare och säkrare förändringscykler med bibehållen driftsstabilitet.",
+      "strategic_issue_ids": [
+        "ISS-003"
+      ],
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-004"
+      ],
+      "priority": "high",
+      "time_horizon": "medium",
+      "baseline_status": "to_be_established",
+      "solution_neutral": true
+    }
+  ],
+  "choices": [
+    {
+      "id": "CHOICE-001",
+      "name": "Gemensamma integrations- och informationsprinciper",
+      "decision_question": "Hur ska Tullverket minska ledtid och punktlösningar i ett växande informationsutbyte?",
+      "goal_ids": [
+        "GOAL-001",
+        "GOAL-003"
+      ],
+      "issue_ids": [
+        "ISS-001",
+        "ISS-003"
+      ],
+      "evidence_ids": [
+        "EVD-003",
+        "EVD-004",
+        "EVD-005"
+      ],
+      "alternatives": [
+        {
+          "name": "Fortsatt huvudsakligen systemvis integration",
+          "description": "Fortsatt huvudsakligen systemvis integration",
+          "advantages": [
+            "Kan vara relevant beroende på målbild och nuläge"
+          ],
+          "disadvantages": [
+            "Kräver närmare analys av konsekvenser och genomförbarhet"
+          ],
+          "risks": [
+            "Risk för felaktigt vägval om intern nulägesbild saknas"
+          ],
+          "reversibility": "medium"
+        },
+        {
+          "name": "Gemensamma centrala integrationsmönster",
+          "description": "Gemensamma centrala integrationsmönster",
+          "advantages": [
+            "Kan vara relevant beroende på målbild och nuläge"
+          ],
+          "disadvantages": [
+            "Kräver närmare analys av konsekvenser och genomförbarhet"
+          ],
+          "risks": [
+            "Risk för felaktigt vägval om intern nulägesbild saknas"
+          ],
+          "reversibility": "medium"
+        },
+        {
+          "name": "Federerade integrationsmönster med gemensam styrning",
+          "description": "Federerade integrationsmönster med gemensam styrning",
+          "advantages": [
+            "Kan vara relevant beroende på målbild och nuläge"
+          ],
+          "disadvantages": [
+            "Kräver närmare analys av konsekvenser och genomförbarhet"
+          ],
+          "risks": [
+            "Risk för felaktigt vägval om intern nulägesbild saknas"
+          ],
+          "reversibility": "medium"
+        }
+      ],
+      "recommended_direction": "Etablera gemensamma, återanvändbara informations- och integrationsmönster med styrning som stödjer både centrala och domänspecifika behov.",
+      "rationale": "Riktningen stödjer förändringsbarhet och återanvändning utan att i detta steg låsa till en viss produkt eller plattform.",
+      "reversibility": "medium",
+      "evidence_requirement": "elevated",
+      "product_neutral": true
+    },
+    {
+      "id": "CHOICE-002",
+      "name": "Data som gemensam strategisk tillgång",
+      "decision_question": "Hur ska data göras användbar över verksamhetsgränser utan att styrning och säkerhet tappas?",
+      "goal_ids": [
+        "GOAL-002"
+      ],
+      "issue_ids": [
+        "ISS-002"
+      ],
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-003"
+      ],
+      "alternatives": [
+        {
+          "name": "Fortsatt systemcentrerad datahantering",
+          "description": "Fortsatt systemcentrerad datahantering",
+          "advantages": [
+            "Kan vara relevant beroende på målbild och nuläge"
+          ],
+          "disadvantages": [
+            "Kräver närmare analys av konsekvenser och genomförbarhet"
+          ],
+          "risks": [
+            "Risk för felaktigt vägval om intern nulägesbild saknas"
+          ],
+          "reversibility": "medium"
+        },
+        {
+          "name": "Centraliserad datahantering",
+          "description": "Centraliserad datahantering",
+          "advantages": [
+            "Kan vara relevant beroende på målbild och nuläge"
+          ],
+          "disadvantages": [
+            "Kräver närmare analys av konsekvenser och genomförbarhet"
+          ],
+          "risks": [
+            "Risk för felaktigt vägval om intern nulägesbild saknas"
+          ],
+          "reversibility": "medium"
+        },
+        {
+          "name": "Federerad datahantering med gemensam styrning",
+          "description": "Federerad datahantering med gemensam styrning",
+          "advantages": [
+            "Kan vara relevant beroende på målbild och nuläge"
+          ],
+          "disadvantages": [
+            "Kräver närmare analys av konsekvenser och genomförbarhet"
+          ],
+          "risks": [
+            "Risk för felaktigt vägval om intern nulägesbild saknas"
+          ],
+          "reversibility": "medium"
+        }
+      ],
+      "recommended_direction": "Behandla data som en gemensam strategisk tillgång med gemensamma krav på kvalitet, åtkomst, metadata och informationssäkerhet, samtidigt som domänansvar kan behållas.",
+      "rationale": "Behovet av stora informationsmängder och avancerad analys är tvärgående, men lösningen bör inte låsas till en specifik arkitekturprodukt i strategin.",
+      "reversibility": "medium",
+      "evidence_requirement": "elevated",
+      "product_neutral": true
+    }
+  ],
+  "principles": [
+    {
+      "id": "PRIN-001",
+      "name": "Återanvänd informationsmönster",
+      "statement": "Återanvänd etablerade informations- och integrationsmönster före att skapa nya punktlösningar.",
+      "rationale": "Minskar förändringskostnad och variation när nya externa krav tillkommer.",
+      "implications": [
+        "Gemensamma mönster behöver ägas och förvaltas",
+        "Avsteg ska motiveras"
+      ],
+      "goal_ids": [
+        "GOAL-001",
+        "GOAL-003"
+      ],
+      "choice_ids": [
+        "CHOICE-001"
+      ]
+    },
+    {
+      "id": "PRIN-002",
+      "name": "Data med tydligt ansvar",
+      "statement": "Data ska ha tydligt ansvar för kvalitet, åtkomst och livscykel oavsett vilket system som lagrar den.",
+      "rationale": "Stödjer återanvändning och analys över verksamhetsgränser.",
+      "implications": [
+        "Informationsansvar måste definieras",
+        "Metadata och åtkomstregler behöver vara konsekventa"
+      ],
+      "goal_ids": [
+        "GOAL-002"
+      ],
+      "choice_ids": [
+        "CHOICE-002"
+      ]
+    }
+  ],
+  "transformations": [
+    {
+      "id": "TR-001",
+      "name": "Från punktintegrationer till återanvändbart informationsutbyte",
+      "current_state": "Flera EU- och myndighetsflöden kräver omfattande digital kommunikation och återkommande förändring.",
+      "target_state": "Informationsutbyte kan byggas och ändras genom gemensamma mönster, kontrakt och styrning.",
+      "transformation_statement": "Etablera gemensam förmåga för förändringsbart och återanvändbart digitalt informationsutbyte.",
+      "expected_effects": [
+        "Kortare ledtid vid regel- och partnerförändringar",
+        "Mindre duplicering",
+        "Bättre spårbarhet"
+      ],
+      "goal_ids": [
+        "GOAL-001",
+        "GOAL-003"
+      ],
+      "choice_ids": [
+        "CHOICE-001"
+      ],
+      "evidence_ids": [
+        "EVD-003",
+        "EVD-004",
+        "EVD-005"
+      ],
+      "priority": "critical",
+      "time_horizon": "medium",
+      "sequence_role": "enabler",
+      "existing_initiative_treatment": "consolidate",
+      "project_level_detail": false
+    },
+    {
+      "id": "TR-002",
+      "name": "Från systembunden data till styrd återanvändbar data",
+      "current_state": "Behovet av att hantera och analysera stora informationsmängder ökar.",
+      "target_state": "Data kan användas över verksamhetsgränser med gemensamma kvalitets-, åtkomst- och säkerhetskrav.",
+      "transformation_statement": "Etablera sammanhängande data- och analysförmåga med tydligt ansvar och återanvändning.",
+      "expected_effects": [
+        "Bättre analysförmåga",
+        "Minskad dubbelhantering",
+        "Snabbare tillgång till relevanta data"
+      ],
+      "goal_ids": [
+        "GOAL-002"
+      ],
+      "choice_ids": [
+        "CHOICE-002"
+      ],
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-003"
+      ],
+      "priority": "high",
+      "time_horizon": "medium",
+      "sequence_role": "parallel",
+      "existing_initiative_treatment": "consolidate",
+      "project_level_detail": false
+    },
+    {
+      "id": "TR-003",
+      "name": "Från förändringsprojekt till uthållig digital förändringsförmåga",
+      "current_state": "Regel- och verksamhetsförändringar skapar återkommande utvecklingsbehov samtidigt som befintliga system ska förvaltas robust.",
+      "target_state": "Gemensamma arbetssätt, automatisering och tekniska möjliggörare stödjer kontinuerlig och säker förändring.",
+      "transformation_statement": "Stärk den gemensamma digitala leveransförmågan och minska friktion mellan utveckling, säkerhet, arkitektur och förvaltning.",
+      "expected_effects": [
+        "Kortare förändringscykler",
+        "Bättre förutsägbarhet",
+        "Mindre förvaltningsskuld"
+      ],
+      "goal_ids": [
+        "GOAL-003"
+      ],
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-004"
+      ],
+      "priority": "high",
+      "time_horizon": "medium",
+      "sequence_role": "enabler",
+      "existing_initiative_treatment": "institutionalize",
+      "project_level_detail": false
+    }
+  ],
+  "roadmap": [
+    {
+      "id": "RM-001",
+      "name": "Etablera strategiska baslinjer och gemensam styrning",
+      "item_type": "strategic_milestone",
+      "goal_ids": [
+        "GOAL-001",
+        "GOAL-002",
+        "GOAL-003"
+      ],
+      "transformation_ids": [
+        "TR-001",
+        "TR-002",
+        "TR-003"
+      ],
+      "time_horizon": "near",
+      "milestone_description": "Fastställ nulägesbaslinjer, ägarskap och gemensamma strategiska mönster för information, data och förändringsförmåga."
+    },
+    {
+      "id": "RM-002",
+      "name": "Skala återanvändbara digitala förmågor",
+      "item_type": "transformation",
+      "goal_ids": [
+        "GOAL-001",
+        "GOAL-002",
+        "GOAL-003"
+      ],
+      "transformation_ids": [
+        "TR-001",
+        "TR-002",
+        "TR-003"
+      ],
+      "time_horizon": "medium",
+      "milestone_description": "Återanvänd integrations-, data- och leveransmönster i flera prioriterade förändringsområden.",
+      "depends_on": [
+        "RM-001"
+      ]
+    },
+    {
+      "id": "RM-003",
+      "name": "Strategisk omprövning mot EU-reform och effektutfall",
+      "item_type": "review_point",
+      "goal_ids": [
+        "GOAL-001",
+        "GOAL-002",
+        "GOAL-003"
+      ],
+      "time_horizon": "long",
+      "milestone_description": "Ompröva mål, vägval och förflyttningar mot utvecklingen av EU:s tullreform, faktisk effekt och förändrade styrkrav.",
+      "depends_on": [
+        "RM-002"
+      ]
+    }
+  ],
+  "status": {
+    "agency_name": "Tullverket",
+    "agency_identifier": "tullverket",
+    "current_phase": 15,
+    "phase_status": "complete",
+    "completed_phases": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "open_source_gap_ids": [
+      "GAP-001"
+    ],
+    "blocking_issues": [],
+    "gate_status": {
+      "research_to_analysis": "passed",
+      "analysis_to_strategy": "passed",
+      "strategy_to_report": "passed"
+    },
+    "next_action": "Use the scenario as a regression fixture; do not treat its sample recommendations as an approved Tullverket strategy."
+  },
+  "source_gaps": [
+    {
+      "id": "GAP-001",
+      "missing_information": "Detaljerad teknisk nulägesarkitektur, systemportfölj och intern genomförandekapacitet finns inte i det offentliga scenario-underlaget.",
+      "importance": "material",
+      "affected_analysis_areas": [
+        "solution feasibility",
+        "sequencing",
+        "architecture consequences"
+      ],
+      "effect_on_confidence": "medium",
+      "expected_source_type": "internal architecture and portfolio material",
+      "mitigation": [
+        "Håll vägval produktneutrala och etablera intern nulägesbaslinje före detaljerad genomförandeplanering."
+      ],
+      "status": "accepted"
+    }
+  ],
+  "quality_expectations": {
+    "all_strategic_goals_trace_to_issues": true,
+    "all_issues_trace_to_evidence": true,
+    "all_choices_compare_alternatives": true,
+    "all_transformations_trace_to_goals": true,
+    "roadmap_preserves_dependencies": true,
+    "product_recommendations": 0,
+    "open_material_gaps_must_be_visible": true,
+    "final_strategy_must_not_claim_internal_architecture_facts": true
+  }
+}

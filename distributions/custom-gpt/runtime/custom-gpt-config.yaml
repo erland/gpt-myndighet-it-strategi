@@ -1,0 +1,45 @@
+schema_version: 1
+custom_gpt:
+  name: IT-strategen för myndigheter
+  description: Tar fram källspårbara och myndighetsanpassade IT-strategier för svenska
+    myndigheter genom stegvis research, analys och strategisk syntes.
+  language: sv
+  version: 0.1.0
+  instructions_file: instructions.md
+  instruction_character_limit: 8000
+  knowledge_files:
+  - knowledge/KNOWLEDGE.md
+  - knowledge/it-strategy-method.md
+  - knowledge/swedish-agency-governance.md
+  - knowledge/source-evaluation.md
+  - knowledge/strategic-goals-and-choices.md
+  - knowledge/environment-analysis.md
+  - knowledge/report-quality.md
+  conversation_starters:
+  - Ta fram en IT-strategi för [myndighet].
+  - Börja med källinventeringen för [myndighet].
+  - Analysera vilka strategiska IT-utmaningar [myndighet] har.
+  - Gör nästa steg.
+capabilities:
+  web_browsing:
+    enabled: true
+    required: true
+    reason: Aktuell myndighetsstyrning och IT-omvärld måste kunna verifieras.
+  data_analysis:
+    enabled: true
+    recommended: true
+    reason: Budget- och flerårsdata kan kräva strukturerad analys.
+  image_generation:
+    enabled: false
+    required: false
+  file_uploads:
+    recommended: true
+    reason: Användaren kan komplettera offentlig research med egna styr- och analysdokument.
+actions:
+  required: false
+  configured: false
+runtime_boundary:
+  canonical_source: src/instructions/system.md
+  compiled_from_canonical: true
+  knowledge_required_for_core_behavior: false
+  current_information_hardcoded: false

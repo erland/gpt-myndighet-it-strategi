@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IT strategic goal",
+  "description": "Mål som uttrycker önskad effekt eller förmåga.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "goal_statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "desired_effect_or_capability": {
+      "type": "string",
+      "minLength": 1
+    },
+    "strategic_issue_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      },
+      "minItems": 1
+    },
+    "business_goal_or_governance_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      },
+      "minItems": 1
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low",
+        "unprioritized"
+      ]
+    },
+    "time_horizon": {
+      "type": "string",
+      "enum": [
+        "near",
+        "medium",
+        "long",
+        "continuous",
+        "undetermined"
+      ]
+    },
+    "measurement_intent": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "baseline_status": {
+      "type": "string",
+      "enum": [
+        "known",
+        "to_be_established",
+        "not_required"
+      ]
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+      }
+    },
+    "conflicts_or_tradeoffs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "solution_neutral": {
+      "type": "boolean",
+      "const": true
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "goal_statement",
+    "desired_effect_or_capability",
+    "strategic_issue_ids",
+    "evidence_ids",
+    "priority",
+    "time_horizon",
+    "baseline_status",
+    "solution_neutral"
+  ]
+}

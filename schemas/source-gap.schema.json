@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Source gap",
+  "description": "Dokumenterad informationslucka och dess påverkan.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_-]{1,63}$"
+    },
+    "missing_information": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_source_type": {
+      "type": "string"
+    },
+    "importance": {
+      "type": "string",
+      "enum": [
+        "blocking",
+        "material",
+        "useful",
+        "minor"
+      ]
+    },
+    "affected_analysis_areas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "effect_on_confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "unknown"
+      ]
+    },
+    "mitigation": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "mitigated",
+        "accepted",
+        "resolved"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "missing_information",
+    "importance",
+    "affected_analysis_areas",
+    "effect_on_confidence",
+    "status"
+  ]
+}

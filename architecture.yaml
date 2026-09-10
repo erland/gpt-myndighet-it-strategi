@@ -1,0 +1,30 @@
+schema_version: 1
+project: it-strategen-myndigheter
+profile: workflow_research_heavy
+canonical:
+  instruction: src/instructions/system.md
+  knowledge_root: knowledge
+runtime_targets:
+- chat_zip
+- custom_gpt
+artifact_targets:
+- project_zip
+principles:
+- single_canonical_behavior_contract
+- evidence_before_recommendation
+- primary_sources_before_secondary_sources
+- explicit_uncertainty
+- current_research_for_time_sensitive_information
+- runtime_parity_where_platforms_allow
+workflow:
+  canonical_document: docs/strategy-workflow.md
+  stateful: true
+  phases: 15
+  gates:
+  - research_readiness
+  - analysis_readiness
+  - synthesis_readiness
+  continue_commands:
+  - fortsätt
+  - gör nästa steg
+  core_runtime_behavior_embedded: true
