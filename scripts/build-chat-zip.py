@@ -19,6 +19,7 @@ REQUIRED = [
     "assistant/instructions.md",
     "assistant/policies/runtime-boundary.md",
     "runtime-manifest.yaml",
+    "runtime-contract.json",
     "VERSION",
 ]
 CORE_MARKERS = [
