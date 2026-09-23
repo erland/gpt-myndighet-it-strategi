@@ -2,22 +2,22 @@
 
 ## Aktuell status
 
-**PASS – steg 1–32 är klara. Version 0.1.0 är stabil release.**
+**PÅGÅR – migrering till GPT Byggaren 1.5.0, steg 33.**
 
-Pilotjusteringarna från 0.1.0-rc.2 är fullt regressionstestade och den stabila releasegrinden har passerat utan blockerande fel eller varningar.
+Den stabila domänversionen **0.1.0** är fortsatt baslinje. Migreringen ska bevara strategimetoden och lägger i första hand till plattformsneutrala kontrakt, modellrobust status/progression och explicit runtime-bedömning.
 
-## Senaste steg
+## Aktuellt migrationssteg
 
-**Steg 32 – Stabil release: KLAR**
+**Steg 33 – GPT Byggaren 1.5-kontrakt och modellrobust kärna**
 
-- stabil version: `0.1.0`
-- projekt-ZIP, Chat ZIP och Custom GPT-paket byggda från samma versionssatta releasekälla
-- release notes och compatibility-dokumentation synkroniserade
-- schemas, researchtester, strategisk härledning, end-to-end, runtime-paritet och hygiene passerar
-- releaseartefakter och SHA-256-checksummor verifierade
+- capability-, artifact-, workspace/state- och tool-kontrakt införda
+- projektet klassat som stateful/research-heavy
+- operativ kärna och auktoritativ statusregel införda
+- modellkompatibilitetsscenarier tillagda
+- fem registrerade runtimes bedömda
+- Chat och Custom GPT kvar som aktiva mål
+- Claude Projects, OpenCode och OpenAI Plugin bedömda som reducerade och ej aktiverade ännu
 
-## Rekommenderat nästa utvecklingsområde
+## Nästa rekommenderade steg
 
-**0.2.x – verklig användningsutvärdering och rapportexport.**
-
-Prioritera feedback från genomförda myndighetsanalyser och överväg därefter förbättringar för rapportexport, ytterligare evals och förfinad hantering av användaruppladdade interna underlag.
+**33 – GPT Byggaren 1.5-kontrakt och modellrobust kärna**, tills CI har verifierat att den stabila 0.1.0-metoden inte har brutits.
