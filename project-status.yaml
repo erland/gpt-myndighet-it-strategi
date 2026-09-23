@@ -7,8 +7,8 @@ plan:
   total_steps: 36
 progress:
   current_phase: migration-1.5
-  current_step: 34
-  last_completed_step: 33
+  current_step: 35
+  last_completed_step: 34
   completed_steps:
   - 1
   - 2
@@ -43,6 +43,7 @@ progress:
   - 31
   - 32
   - 33
+  - 34
   skipped_steps: []
   inserted_steps:
   - 33
@@ -54,10 +55,10 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 34
-  title: Anpassa distributionsmotorn till 1.5
-  reason: Steg 33 är fullt CI-verifierat utan domänregression. Nästa steg är att
-    anpassa Chat och Custom GPT till 1.5-kontrakten och verifiera kompilerad kärna.
+  recommended: 35
+  title: Generaliserad runtime parity och release readiness
+  reason: Steg 34 är CI-verifierat. Nästa steg är att generalisera runtime parity
+    och release readiness till GPT Byggaren 1.5-modellen.
 resume:
   supported: true
   required_files:
@@ -66,8 +67,8 @@ resume:
   - docs/development-plan.md
   - STATUS.md
   - PROJECT.md
-  human_readable_status: Steg 1–33 är verifierade. Migrering till GPT Byggaren
-    1.5.0 fortsätter med distributionsanpassning i steg 34.
+  human_readable_status: Steg 1–34 är verifierade. Migrering till GPT Byggaren
+    1.5.0 fortsätter med generaliserad runtime parity i steg 35.
 validation:
   last_result: pass
   checks:
