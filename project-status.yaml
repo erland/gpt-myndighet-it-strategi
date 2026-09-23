@@ -6,9 +6,9 @@ plan:
   path: docs/development-plan.md
   total_steps: 36
 progress:
-  current_phase: migration-1.5
+  current_phase: maintenance
   current_step: 36
-  last_completed_step: 35
+  last_completed_step: 36
   completed_steps:
   - 1
   - 2
@@ -45,6 +45,7 @@ progress:
   - 33
   - 34
   - 35
+  - 36
   skipped_steps: []
   inserted_steps:
   - 33
@@ -52,14 +53,14 @@ progress:
   - 35
   - 36
 state:
-  overall: in-progress
+  overall: pass
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 36
-  title: Slutvalidera migreringen och releasekedjan
-  reason: Steg 35 är CI-verifierat med generaliserad runtime parity och release
-    readiness. Nästa steg är full slutvalidering av migreringen och releasekedjan.
+  recommended: null
+  title: GPT Byggaren 1.5.0-migrering klar
+  reason: Samtliga migrationssteg 33–36 är verifierade. Full regression,
+    runtime parity, release readiness och CI/release-paritet passerar.
 resume:
   supported: true
   required_files:
@@ -68,8 +69,8 @@ resume:
   - docs/development-plan.md
   - STATUS.md
   - PROJECT.md
-  human_readable_status: Steg 1–35 är verifierade. Migrering till GPT Byggaren
-    1.5.0 fortsätter med slutvalidering i steg 36.
+  human_readable_status: Steg 1–36 är verifierade. Migreringen till GPT Byggaren
+    1.5.0 är klar och projektet är redo att mergeas.
 validation:
   last_result: pass
   checks:
