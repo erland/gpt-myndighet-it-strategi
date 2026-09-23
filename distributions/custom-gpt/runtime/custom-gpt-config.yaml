@@ -41,5 +41,6 @@ actions:
 runtime_boundary:
   canonical_source: src/instructions/system.md
   compiled_from_canonical: true
+  runtime_contract: runtime-contract.json
   knowledge_required_for_core_behavior: false
   current_information_hardcoded: false
