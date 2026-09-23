@@ -8,6 +8,9 @@ CANON = ROOT/'src/instructions/system.md'
 CHAT = ROOT/'distributions/chat/runtime/assistant/instructions.md'
 CUSTOM = ROOT/'distributions/custom-gpt/runtime/instructions.md'
 CFG = ROOT/'distributions/custom-gpt/runtime/custom-gpt-config.yaml'
+PROJECT_CFG = ROOT/'gpt-project.yaml'
+CHAT_CONTRACT = ROOT/'distributions/chat/runtime/runtime-contract.json'
+CUSTOM_CONTRACT = ROOT/'distributions/custom-gpt/runtime/runtime-contract.json'
 
 errors=[]
 notes=[]
@@ -19,6 +22,9 @@ canon=CANON.read_text(encoding='utf-8')
 chat=CHAT.read_text(encoding='utf-8')
 custom=CUSTOM.read_text(encoding='utf-8')
 config=yaml.safe_load(CFG.read_text(encoding='utf-8'))
+project_cfg=yaml.safe_load(PROJECT_CFG.read_text(encoding='utf-8'))
+chat_contract=json.loads(CHAT_CONTRACT.read_text(encoding='utf-8'))
+custom_contract=json.loads(CUSTOM_CONTRACT.read_text(encoding='utf-8'))
 
 check(canon==chat,'Chat-instruktionen är inte byte-identisk med canonical instruktion')
 check(len(custom)<=8000,f'Custom GPT-instruktionen överskrider gränsen: {len(custom)}')
@@ -69,6 +75,41 @@ check(caps.get('web_browsing',{}).get('required') is True,'Custom GPT web browsi
 check(caps.get('data_analysis',{}).get('enabled') is True,'Custom GPT data analysis är inte aktiverad')
 check(config.get('actions',{}).get('required') is False,'Custom GPT kräver oväntat Actions')
 
+# GPT Byggaren 1.5: alla registrerade runtimes ska vara explicit bedömda.
+registered_expected={'chatgpt_chat','chatgpt_custom','claude_project','opencode','openai_plugin'}
+categories_expected={'behavior','capability','artifact','workspace_state','tool'}
+parity_cfg=project_cfg.get('runtime_parity',{})
+registered=set(parity_cfg.get('registered_runtimes',[]))
+categories=set(parity_cfg.get('compared_categories',[]))
+check(registered==registered_expected,f'Registrerade runtimes avviker: {sorted(registered)}')
+check(categories==categories_expected,f'Paritetskategorier avviker: {sorted(categories)}')
+
+candidates={
+  item.get('runtime_id'): item
+  for item in project_cfg.get('analysis',{}).get('runtime',{}).get('candidates',[])
+  if isinstance(item,dict) and item.get('runtime_id')
+}
+check(set(candidates)==registered_expected,'Alla fem registrerade runtimes måste ha explicit suitability-bedömning')
+for runtime_id in registered_expected:
+    item=candidates.get(runtime_id,{})
+    check(bool(item.get('reason')),f'{runtime_id} saknar motivering')
+    check(item.get('suitability') in {'ready','reduced','not_viable'},f'{runtime_id} har ogiltig suitability')
+
+for runtime_id in ('chatgpt_chat','chatgpt_custom'):
+    check(candidates.get(runtime_id,{}).get('activate_by_default') is True,f'{runtime_id} ska vara aktiv som standard')
+for runtime_id in ('claude_project','opencode','openai_plugin'):
+    check(candidates.get(runtime_id,{}).get('activate_by_default') is False,f'{runtime_id} ska inte vara aktiv som standard')
+    check(candidates.get(runtime_id,{}).get('suitability') == 'reduced',f'{runtime_id} ska vara bedömd som reduced i denna migrering')
+
+check(project_cfg.get('runtime',{}).get('chat_zip',{}).get('enabled') is True,'Chat ZIP ska vara enabled')
+check(project_cfg.get('runtime',{}).get('custom_gpt',{}).get('enabled') is True,'Custom GPT ska vara enabled')
+
+# Runtime-kontrakt för aktiva runtimes måste finnas och peka på rätt adapter.
+check(chat_contract.get('runtime_id')=='chatgpt_chat','Chat runtime-contract har fel runtime_id')
+check(custom_contract.get('runtime_id')=='chatgpt_custom','Custom GPT runtime-contract har fel runtime_id')
+check(chat_contract.get('adapter',{}).get('web_research_required') is True,'Chat runtime-contract måste kräva webbresearch')
+check(custom_contract.get('adapter',{}).get('web_research_required') is True,'Custom GPT runtime-contract måste kräva webbresearch')
+
 # Dokumenterade, accepterade plattformsskillnader.
 notes.extend([
   'Chat ZIP använder full canonical instruktion; Custom GPT använder kompilerad instruktion <= 8 000 tecken.',
@@ -86,6 +127,10 @@ result={
   'behavior_contracts_passed':len(contract_markers)-sum(1 for cid,ms in contract_markers.items() if any(m not in custom for m in ms)),
   'knowledge_files_chat':len(chat_k),
   'knowledge_files_custom':len(custom_k),
+  'registered_runtimes':sorted(registered),
+  'compared_categories':sorted(categories),
+  'active_runtimes':['chatgpt_chat','chatgpt_custom'],
+  'assessed_inactive_runtimes':['claude_project','opencode','openai_plugin'],
   'errors':errors,
   'accepted_platform_differences':notes,
 }
