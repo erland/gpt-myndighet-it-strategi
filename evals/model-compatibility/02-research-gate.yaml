@@ -1,0 +1,6 @@
+id: model-compat-research-gate
+scenario: Modellen har generella IT-trender men saknar tillräcklig myndighetsspecifik evidens.
+expected:
+  - generell trendinformation ersätter inte myndighetsspecifik evidens
+  - informationsluckan görs explicit
+  - strategisk rekommendation försvagas eller skjuts upp
