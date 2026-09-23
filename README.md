@@ -59,14 +59,14 @@ Byggartefakter skapas under `dist/`, som är genererad och ignorerad.
 
 ## Utvecklingsstatus
 
-**Steg 1–35 är verifierade. Version 0.1.0 är fortsatt stabil baslinje och GPT Byggaren 1.5-migreringen slutvalideras i steg 36.** Pilotgranskningen från `0.1.0-rc.2` är införlivad och hela kvalitetsgrinden passerar utan blockerande fel eller varningar. Se:
+**Steg 1–36 är verifierade. Version 0.1.0 är fortsatt stabil baslinje och migreringen till GPT Byggaren 1.5.0 är klar.** Pilotgranskningen från `0.1.0-rc.2` är införlivad och hela kvalitetsgrinden passerar utan blockerande fel eller varningar. Se:
 
 - `project-status.yaml` för maskinläsbar status,
 - `STATUS.md` för kort mänsklig status,
 - `docs/stable-release-report-0.1.0.md` för stabil releasegrind,
 - `docs/development-plan.md` för hela planen.
 
-**Nästa migrationssteg:** steg 36, slutvalidering av GPT Byggaren 1.5-migreringen och releasekedjan. Efter migreringen återgår nästa produktutvecklingsområde till 0.2.x.
+**Nästa produktutvecklingsområde:** 0.2.x, baserat på verklig användningsfeedback och eventuell rapportexport.
 
 ## Release-build
 
