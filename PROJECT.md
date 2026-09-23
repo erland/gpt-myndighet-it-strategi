@@ -43,7 +43,7 @@ Alla distributioner ska härledas från samma canonical beteendekontrakt.
 
 ## Runtime-paritet
 
-Chat ZIP och Custom GPT ska ha samma strategiska beslutslogik trots olika distributionsformat. Steg 25 verifierar detta genom beteendekontrakt, Knowledge-paritet och capability-kontroller. Accepterade plattformsskillnader dokumenteras i `docs/runtime-parity-report.md`; blockerande beteendedrift är inte tillåten.
+Chat ZIP och Custom GPT ska ha samma strategiska beslutslogik trots olika distributionsformat. GPT Byggaren 1.5 registrerar dessutom Claude Projects, OpenCode och OpenAI Plugin som peer candidates. För detta research-heavy projekt är endast Chat och Custom GPT aktiva; övriga förblir reducerade/inaktiva tills research- och källparitet kan verifieras. Accepterade plattformsskillnader dokumenteras i `docs/runtime-parity-report.md`; blockerande beteendedrift är inte tillåten.
 
 
 ## Steg 26 – Project hygiene och dokumentationsgranskning
@@ -104,3 +104,8 @@ Steg 31 har verifierat metoden mot Skatteverket, Mediemyndigheten, Läkemedelsve
 - Alla 32 planerade steg är slutförda.
 - Full regression, runtime-paritet, hygiene och releaseartefaktintegritet passerar.
 - Stable release-dokumentation finns i `docs/stable-release-report-0.1.0.md` och `docs/release-notes-0.1.0.md`.
+
+
+## GPT Byggaren 1.5-migrering
+
+Migreringssteg 33–35 är verifierade. Projektet har nu plattformsneutrala capability-, artifact-, workspace/state- och tool-kontrakt, stateful modellrobust progression, explicita runtime-kontrakt för de aktiva distributionerna samt generaliserad runtime parity och release-readiness. Steg 36 slutvaliderar hela migrations- och releasekedjan.
