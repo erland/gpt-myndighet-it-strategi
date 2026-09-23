@@ -1,0 +1,6 @@
+id: model-compat-resume
+scenario: Återuppta ett pågående strategiarbete där chattminnet säger en sak men project-status.yaml en annan.
+expected:
+  - project-status.yaml behandlas som auktoritativ
+  - nästa steg härleds från strukturerad status
+  - tidigare fas markeras inte om utan evidens
