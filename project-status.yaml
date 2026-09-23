@@ -7,8 +7,8 @@ plan:
   total_steps: 36
 progress:
   current_phase: migration-1.5
-  current_step: 33
-  last_completed_step: 32
+  current_step: 34
+  last_completed_step: 33
   completed_steps:
   - 1
   - 2
@@ -42,6 +42,7 @@ progress:
   - 30
   - 31
   - 32
+  - 33
   skipped_steps: []
   inserted_steps:
   - 33
@@ -53,10 +54,10 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 33
-  title: GPT Byggaren 1.5-kontrakt och modellrobust kärna
-  reason: Version 0.1.0 är stabil. Migrering till GPT Byggaren 1.5.0 har startat
-    och steg 33 väntar på full CI-verifiering.
+  recommended: 34
+  title: Anpassa distributionsmotorn till 1.5
+  reason: Steg 33 är fullt CI-verifierat utan domänregression. Nästa steg är att
+    anpassa Chat och Custom GPT till 1.5-kontrakten och verifiera kompilerad kärna.
 resume:
   supported: true
   required_files:
@@ -65,8 +66,8 @@ resume:
   - docs/development-plan.md
   - STATUS.md
   - PROJECT.md
-  human_readable_status: Steg 1–32 är stabila. Migrering till GPT Byggaren 1.5.0
-    pågår i steg 33 utan avsiktlig ändring av domänbeteendet.
+  human_readable_status: Steg 1–33 är verifierade. Migrering till GPT Byggaren
+    1.5.0 fortsätter med distributionsanpassning i steg 34.
 validation:
   last_result: pass
   checks:
