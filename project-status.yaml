@@ -7,8 +7,8 @@ plan:
   total_steps: 36
 progress:
   current_phase: migration-1.5
-  current_step: 35
-  last_completed_step: 34
+  current_step: 36
+  last_completed_step: 35
   completed_steps:
   - 1
   - 2
@@ -44,6 +44,7 @@ progress:
   - 32
   - 33
   - 34
+  - 35
   skipped_steps: []
   inserted_steps:
   - 33
@@ -55,10 +56,10 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 35
-  title: Generaliserad runtime parity och release readiness
-  reason: Steg 34 är CI-verifierat. Nästa steg är att generalisera runtime parity
-    och release readiness till GPT Byggaren 1.5-modellen.
+  recommended: 36
+  title: Slutvalidera migreringen och releasekedjan
+  reason: Steg 35 är CI-verifierat med generaliserad runtime parity och release
+    readiness. Nästa steg är full slutvalidering av migreringen och releasekedjan.
 resume:
   supported: true
   required_files:
@@ -67,8 +68,8 @@ resume:
   - docs/development-plan.md
   - STATUS.md
   - PROJECT.md
-  human_readable_status: Steg 1–34 är verifierade. Migrering till GPT Byggaren
-    1.5.0 fortsätter med generaliserad runtime parity i steg 35.
+  human_readable_status: Steg 1–35 är verifierade. Migrering till GPT Byggaren
+    1.5.0 fortsätter med slutvalidering i steg 36.
 validation:
   last_result: pass
   checks:
