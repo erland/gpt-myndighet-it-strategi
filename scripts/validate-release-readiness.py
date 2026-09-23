@@ -26,6 +26,10 @@ def sha256(path: Path) -> str:
             h.update(chunk)
     return h.hexdigest()
 
+# Readiness must be repeatable even when CI has already built runtime artifacts.
+# dist/ is generated output and is removed before source hygiene checks.
+shutil.rmtree(ROOT / 'dist', ignore_errors=True)
+
 # Static/runtime/test gates
 run('project_lint', [sys.executable, 'scripts/validate-project.py'])
 run('schemas', [sys.executable, 'scripts/validate-schemas.py'])
