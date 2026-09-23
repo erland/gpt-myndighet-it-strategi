@@ -1,0 +1,7 @@
+id: model-compat-next-step
+scenario: Användaren säger Gör nästa steg.
+expected:
+  - aktuell strukturerad status läses
+  - blockerare och failing gates prioriteras
+  - exakt ett avgränsat mål väljs
+  - nästa rekommendation baseras på faktisk status
