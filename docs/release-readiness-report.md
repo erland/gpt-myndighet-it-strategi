@@ -34,3 +34,16 @@
 Inga blockerande fel eller accepterade kvarvarande varningar finns inför första RC. De kända plattformsskillnaderna mellan Chat ZIP och Custom GPT är tidigare granskade i runtime-paritetsrapporten och betraktas som avsiktliga distributionsskillnader, inte releasevarningar.
 
 Nästa steg är **Steg 30 – Första release candidate**.
+
+
+## GPT Byggaren 1.5-migrering
+
+Den ursprungliga 0.1.0-releasegrinden ovan är fortsatt historisk baslinje. Under migreringssteg 35 har release-readiness utökats med:
+
+- explicit registrering och bedömning av ChatGPT Chat, ChatGPT Custom, Claude Projects, OpenCode och OpenAI Plugin,
+- fem paritetskategorier: behavior, capability, artifact, workspace_state och tool,
+- blockerande runtime-kontrakt för de aktiva Chat- och Custom GPT-distributionerna,
+- krav att Claude Projects, OpenCode och OpenAI Plugin förblir inaktiva tills research- och källparitet har verifierats,
+- full RC-simulering med den generaliserade runtime-paritetsgrinden.
+
+**Migrationsresultat för steg 35: PASS.**
