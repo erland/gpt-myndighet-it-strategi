@@ -16,12 +16,12 @@ Den strategiska huvudkedjan är:
 
 ## Distributioner
 
-Projektet har två verifierade runtime-format från samma canonical kontrakt:
+Projektet har två aktiva och verifierade runtime-format från samma canonical kontrakt:
 
 - **Chat ZIP** – full canonical instruktion, Knowledge och JSON Schemas.
 - **Custom GPT** – kompilerad instruktion och kuraterad Knowledge inom plattformsgränserna.
 
-Runtime-pariteten är verifierad utan blockerande avvikelser. Källorna för distributionerna finns under `distributions/`; genererade ZIP-filer byggs med skripten i `scripts/` och ska inte lagras i projektets `dist/`.
+Runtime-pariteten följer GPT Byggaren 1.5 och omfattar fem registrerade runtimes. Chat och Custom GPT är aktiva; Claude Projects, OpenCode och OpenAI Plugin är bedömda men inaktiva tills research- och källparitet kan verifieras. Källorna för distributionerna finns under `distributions/`; genererade ZIP-filer byggs med skripten i `scripts/` och ska inte lagras i projektets `dist/`.
 
 ## Tester och validering
 
@@ -59,14 +59,14 @@ Byggartefakter skapas under `dist/`, som är genererad och ignorerad.
 
 ## Utvecklingsstatus
 
-**Steg 1–32 är klara. Version 0.1.0 är stabil release.** Pilotgranskningen från `0.1.0-rc.2` är införlivad och hela kvalitetsgrinden passerar utan blockerande fel eller varningar. Se:
+**Steg 1–35 är verifierade. Version 0.1.0 är fortsatt stabil baslinje och GPT Byggaren 1.5-migreringen slutvalideras i steg 36.** Pilotgranskningen från `0.1.0-rc.2` är införlivad och hela kvalitetsgrinden passerar utan blockerande fel eller varningar. Se:
 
 - `project-status.yaml` för maskinläsbar status,
 - `STATUS.md` för kort mänsklig status,
 - `docs/stable-release-report-0.1.0.md` för stabil releasegrind,
 - `docs/development-plan.md` för hela planen.
 
-**Nästa utvecklingsområde:** 0.2.x, baserat på verklig användningsfeedback och eventuell rapportexport.
+**Nästa migrationssteg:** steg 36, slutvalidering av GPT Byggaren 1.5-migreringen och releasekedjan. Efter migreringen återgår nästa produktutvecklingsområde till 0.2.x.
 
 ## Release-build
 
