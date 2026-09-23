@@ -117,6 +117,7 @@ def main() -> None:
             "scripts/run-end-to-end-tests.py",
             "scripts/validate-runtime-parity.py",
             "scripts/validate-hygiene.py",
+            "scripts/validate-workflow-parity.py",
         ]
         for script in checks:
             run([sys.executable, script], stage)
