@@ -4,11 +4,11 @@ project:
   name: IT-strategen för myndigheter
 plan:
   path: docs/development-plan.md
-  total_steps: 32
+  total_steps: 36
 progress:
-  current_phase: Stabil release klar
-  current_step: 32
-  last_completed_step: 32
+  current_phase: maintenance
+  current_step: 36
+  last_completed_step: 36
   completed_steps:
   - 1
   - 2
@@ -42,17 +42,25 @@ progress:
   - 30
   - 31
   - 32
+  - 33
+  - 34
+  - 35
+  - 36
   skipped_steps: []
-  inserted_steps: []
+  inserted_steps:
+  - 33
+  - 34
+  - 35
+  - 36
 state:
   overall: pass
   blocking_issues: []
   warnings: []
 next_step:
   recommended: null
-  title: 0.2.x – verklig användningsutvärdering och rapportexport
-  reason: Alla 32 planerade steg är klara och version 0.1.0 är stabil. Nästa arbete
-    bör styras av verklig användningsfeedback.
+  title: GPT Byggaren 1.5.0-migrering klar
+  reason: Samtliga migrationssteg 33–36 är verifierade. Full regression,
+    runtime parity, release readiness och CI/release-paritet passerar.
 resume:
   supported: true
   required_files:
@@ -61,8 +69,8 @@ resume:
   - docs/development-plan.md
   - STATUS.md
   - PROJECT.md
-  human_readable_status: Steg 1–32 är klara. Version 0.1.0 är stabil release; fortsätt
-    vid behov med 0.2.x-förbättringar baserade på användningsfeedback.
+  human_readable_status: Steg 1–36 är verifierade. Migreringen till GPT Byggaren
+    1.5.0 är klar och projektet är redo att mergeas.
 validation:
   last_result: pass
   checks:

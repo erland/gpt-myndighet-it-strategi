@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "runtime_id": "chatgpt_custom",
+  "capabilities": {
+    "web": {
+      "level": "required"
+    },
+    "filesystem": {
+      "read": "required",
+      "write": "recommended"
+    },
+    "code_execution": {
+      "level": "recommended"
+    },
+    "structured_data": {
+      "level": "required"
+    },
+    "persistent_state": {
+      "level": "required"
+    }
+  },
+  "artifacts": {
+    "strategy_report": {
+      "requirement": "required",
+      "format": "markdown"
+    },
+    "executive_strategy_version": {
+      "requirement": "required",
+      "format": "markdown"
+    }
+  },
+  "workspace_state": {
+    "state_authority": "workspace_file",
+    "state_path": "project-status.yaml",
+    "conversation_fallback": false
+  },
+  "adapter": {
+    "mode": "custom_gpt",
+    "compiled_instruction": "instructions.md",
+    "web_research_required": true,
+    "local_tools_embedded": false
+  }
+}

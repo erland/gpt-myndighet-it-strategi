@@ -6,7 +6,7 @@ VERSION=(ROOT/'VERSION').read_text(encoding='utf-8').strip()
 RUNTIME=ROOT/'distributions/custom-gpt/runtime'
 OUT=ROOT/'dist'/f'it-strategen-myndigheter-custom-gpt-{VERSION}.zip'
 OUT.parent.mkdir(exist_ok=True)
-required=['README.md','instructions.md','custom-gpt-config.yaml','compatibility.md','VERSION']
+required=['README.md','instructions.md','custom-gpt-config.yaml','compatibility.md','runtime-contract.json','VERSION']
 for f in required:
     if not (RUNTIME/f).exists(): raise SystemExit(f'Missing {f}')
 instr=(RUNTIME/'instructions.md').read_text(encoding='utf-8')

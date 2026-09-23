@@ -79,3 +79,10 @@ jobs:
             dist/*.sha256
           if-no-files-found: error
           retention-days: 14
+
+
+      - name: Release readiness
+        run: python scripts/validate-release-readiness.py
+
+      - name: Workflow parity
+        run: python scripts/validate-workflow-parity.py

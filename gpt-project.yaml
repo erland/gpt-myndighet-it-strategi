@@ -8,6 +8,37 @@ analysis:
   profile: workflow_research_heavy
   rationale: Research-heavy flerstegsflöde med höga krav på källvärdering, evidens
     och spårbarhet.
+  runtime:
+    strategy: peer_candidates
+    candidates:
+    - runtime_id: chatgpt_chat
+      suitability: ready
+      activate_by_default: true
+      reason: Fullt stöd för webbresearch, filer, källhänvisningar och portabelt tillstånd.
+    - runtime_id: chatgpt_custom
+      suitability: reduced
+      activate_by_default: true
+      reason: Kärnflödet stöds, men research- och filfunktioner beror på aktiverade plattformsverktyg.
+    - runtime_id: claude_project
+      suitability: reduced
+      activate_by_default: false
+      reason: Instruktioner och Knowledge kan paketeras men persistent workspace och deterministisk verifiering är begränsad.
+    - runtime_id: opencode
+      suitability: reduced
+      activate_by_default: false
+      reason: Workspace och lokal exekvering passar, men webbresearch och källparitet är miljöberoende och måste verifieras först.
+    - runtime_id: openai_plugin
+      suitability: reduced
+      activate_by_default: false
+      reason: Plugin v1 kan bära skills och referenser men realiserar inte själv hela research-, workspace- och tillståndsflödet.
+model_robustness:
+  level: stateful
+  design_target: simpler_and_stronger_llms
+  separate_model_instructions: false
+  prefer_deterministic_validation: true
+  max_core_policy_hops: 1
+  model_compatibility:
+    scenarios: evals/model-compatibility/
 instructions:
   canonical: src/instructions/system.md
   core_contract:
@@ -16,6 +47,8 @@ instructions:
     - Myndighetsspecifik evidens väger tyngre än generell IT-trendinformation.
     - Observation → källa → betydelse → strategisk konsekvens → rekommendation.
     - Bygg strategin stegvis
+    - Operativ kärna
+    - Auktoritativ status
     required_runtime_dependencies: []
     max_required_file_hops: 1
     knowledge_may_not_be_required_for_core_behavior: true
@@ -60,16 +93,121 @@ runtime:
     config: distributions/custom-gpt/runtime/custom-gpt-config.yaml
     knowledge_count: 7
 capabilities:
-  web_research:
-    required: true
-    reason: Myndighetsunderlag och IT-omvärld är tidskänsliga och myndighetsspecifika.
-  data_analysis:
-    recommended: true
-    reason: Ekonomiska flerårsdata och strukturerade underlag kan behöva analyseras.
-  image_generation:
-    required: false
-  file_handling:
-    recommended: true
+  contract_version: 1
+  schema: schemas/capability-contract.schema.json
+  recommendation_mode: inferred_from_use_case
+  ask_user_only_when_business_choice_is_ambiguous: true
+  requirements:
+    web:
+      level: required
+      reason: Myndighetsunderlag och IT-omvärld är tidskänsliga och myndighetsspecifika.
+    filesystem:
+      read: required
+      write: recommended
+    shell:
+      level: optional
+    code_execution:
+      level: recommended
+      reason: Strukturerade underlag och flerårsdata kan behöva analyseras deterministiskt.
+    structured_data:
+      level: required
+    persistent_state:
+      level: required
+    external_tools:
+      level: optional
+    image_generation:
+      level: not_required
+
+artifacts:
+  contract_version: 1
+  schema: schemas/artifact-contract.schema.json
+  outputs:
+    strategy_report:
+      kind: report
+      format: markdown
+      requirement: required
+      persistence: persistent
+      multiplicity: one
+    executive_strategy_version:
+      kind: report
+      format: markdown
+      requirement: required
+      persistence: persistent
+      multiplicity: one
+    project_package:
+      kind: package
+      format: zip
+      requirement: required
+      persistence: persistent
+      multiplicity: one
+    runtime_package:
+      kind: distribution
+      format: zip
+      requirement: required
+      persistence: persistent
+      multiplicity: many
+
+workspace_state:
+  contract_version: 1
+  schema: schemas/workspace-state-contract.schema.json
+  workspace:
+    requirement: required
+    persistence: required
+    portable: true
+    separate_from_assistant: true
+    artifact: project_package
+  state:
+    requirement: required
+    persistence: required
+    authority: workspace_file
+    format: yaml
+    path: project-status.yaml
+    conversation_fallback: false
+  runtime_preferences:
+    chat: conversation_or_file
+    agent: workspace_file
+
+tools:
+  contract_version: 1
+  schema: schemas/tool-contract.schema.json
+  tools: []
+
+workflow:
+  mode: explicit_state_machine
+  policy: src/runtime-policy/operational-execution-policy.md
+  current_state_source: project-status.yaml
+  execution_rule: one_state_or_bounded_goal_per_step
+  operational_core:
+  - read_project_contract
+  - read_project_status
+  - select_one_state_or_bounded_goal
+  - load_only_relevant_policy
+  - execute_change
+  - validate_deterministically
+  - correct_before_completion_on_failure
+  - update_structured_status_after_pass
+  - recommend_next_step_from_actual_state
+  states:
+    idea_analysis:
+      next: [architecture]
+    architecture:
+      next: [planning]
+    planning:
+      next: [implementation]
+    implementation:
+      next: [validation]
+    validation:
+      next: [implementation, packaging]
+    packaging:
+      next: [release]
+    release:
+      next: [maintenance]
+    maintenance:
+      next: [implementation, validation]
+    blocked:
+      control_state: true
+    paused:
+      control_state: true
 development:
   plan: docs/development-plan.md
   status: project-status.yaml
@@ -119,3 +257,28 @@ stable_release:
   blocking_issues: 0
   warnings: 0
   report: docs/stable-release-report-0.1.0.md
+
+build:
+  deterministic: true
+  create_manifest: true
+  create_checksums: true
+  build_project_zip: true
+  build_chat_zip: true
+  build_custom_gpt_zip: true
+  build_claude_zip: false
+  build_opencode_zip: false
+  build_plugin_zip: false
+
+runtime_parity:
+  registered_runtimes:
+  - chatgpt_chat
+  - chatgpt_custom
+  - claude_project
+  - opencode
+  - openai_plugin
+  compared_categories:
+  - behavior
+  - capability
+  - artifact
+  - workspace_state
+  - tool

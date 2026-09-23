@@ -837,3 +837,79 @@ Publicera första stabila versionen.
 ## Planstatus
 
 **Alla 32 planerade steg är klara.** Version 0.1.0 är stabil release. Fortsatt utveckling sker som nya 0.2.x-steg baserat på verklig användningsfeedback.
+
+
+---
+
+## Steg 33 – GPT Byggaren 1.5-kontrakt och modellrobust kärna
+
+### Mål
+Migrera projektets canonical kontrakt till GPT Byggaren 1.5.0 utan att ändra strategimetoden.
+
+### Leveranser
+- plattformsneutrala capability-, artifact-, workspace/state- och tool-kontrakt
+- stateful modellrobust workflow
+- explicit operativ kärna och auktoritativ status
+- fyra modellkompatibilitetsscenarier
+- bedömning av samtliga fem registrerade runtimes
+
+### Klart när
+- befintlig CI är grön
+- domänbeteendet är oförändrat
+- 1.5-kontrakten är lintbara och spårbara
+
+---
+
+## Steg 34 – Anpassa distributionsmotorn till 1.5
+
+### Mål
+Låta Chat ZIP och Custom GPT byggas från samma 1.5-kontrakt utan att förlora den research-heavy metodiken.
+
+### Leveranser
+- runtime-kontrakt i distributionerna
+- verifierad Custom GPT-kompilering som bevarar kärnmarkörer
+- tydlig separation mellan canonical instruktion och kompilerad runtime-instruktion
+- bedömning om OpenCode kan aktiveras efter research-paritetstest
+
+### Klart när
+- Chat och Custom GPT passerar distributionsvalidering
+- inga kärnregler tappas i Custom GPT-kompileringen
+
+---
+
+## Steg 35 – Generaliserad runtime parity och release readiness
+
+### Mål
+Utöka paritetsgrinden från två distributionsformat till 1.5-modellens fem registrerade runtimes.
+
+### Leveranser
+- parity-bedömning för behavior, capability, artifact, workspace/state och tool
+- explicit status för Claude Projects, OpenCode och OpenAI Plugin
+- release readiness som blockerar vid oavsiktlig runtime-drift
+
+### Klart när
+- aktiva runtimes är verifierade
+- reducerade/inaktiva runtimes har explicit motivering
+
+---
+
+## Steg 36 – Slutvalidera migreringen och releasekedjan
+
+### Mål
+Verifiera hela migreringen från rent checkout till releaseartefakter.
+
+### Leveranser
+- full regression
+- CI/release-paritet
+- migrationsnoter
+- uppdaterad projektstatus
+
+### Klart när
+- samtliga aktiva distributioner och gates passerar
+- projektet är redo att mergeas och releasas
+
+---
+
+## Migrationsstatus
+
+Migrering till GPT Byggaren 1.5.0 pågår från den stabila basen 0.1.0. Steg 33 är aktuellt.

@@ -2,22 +2,36 @@
 
 ## Aktuell status
 
-**PASS – steg 1–32 är klara. Version 0.1.0 är stabil release.**
+**PASS – migreringen till GPT Byggaren 1.5.0 är klar.**
 
-Pilotjusteringarna från 0.1.0-rc.2 är fullt regressionstestade och den stabila releasegrinden har passerat utan blockerande fel eller varningar.
+Den stabila domänversionen **0.1.0** är fortsatt baslinje och strategimetoden är bevarad.
 
-## Senaste steg
+## Slutverifiering
 
-**Steg 32 – Stabil release: KLAR**
+- steg 1–36 verifierade
+- project lint: PASS
+- schemas: PASS
+- research/källtester: PASS
+- strategisk härledning: PASS
+- end-to-end: PASS
+- Chat ZIP: PASS
+- Custom GPT: PASS
+- runtime parity för fem registrerade runtimes: PASS
+- release-readiness med RC-simulering: PASS
+- CI/release workflow parity: PASS
+- releaseartefakter och checksummor: PASS
 
-- stabil version: `0.1.0`
-- projekt-ZIP, Chat ZIP och Custom GPT-paket byggda från samma versionssatta releasekälla
-- release notes och compatibility-dokumentation synkroniserade
-- schemas, researchtester, strategisk härledning, end-to-end, runtime-paritet och hygiene passerar
-- releaseartefakter och SHA-256-checksummor verifierade
+## Runtime-status
 
-## Rekommenderat nästa utvecklingsområde
+Aktiva:
+- ChatGPT Chat
+- ChatGPT Custom
 
-**0.2.x – verklig användningsutvärdering och rapportexport.**
+Bedömda men inaktiva tills research- och källparitet verifierats:
+- Claude Projects
+- OpenCode
+- OpenAI Plugin
 
-Prioritera feedback från genomförda myndighetsanalyser och överväg därefter förbättringar för rapportexport, ytterligare evals och förfinad hantering av användaruppladdade interna underlag.
+## Nästa rekommenderade utvecklingsområde
+
+Inga blockerande migrationssteg återstår. Nästa produktutveckling kan återgå till **0.2.x – verklig användningsutvärdering och rapportexport**.

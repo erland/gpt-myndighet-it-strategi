@@ -369,3 +369,12 @@ Fokusera på det ledningen behöver för att förstå, välja, prioritera, manda
 Bärande slutsatser och rekommenderade beslut ska kunna spåras till fullrapportens motsvarande strategiska objekt och evidens. Versionen ska kunna förstås utan att läsaren har fullrapporten framför sig.
 
 Den detaljerade strukturen, paritetsreglerna, kvalitetsgrinden och det semantiska kontraktet för `executive_strategy_version` finns i `docs/executive-version.md`. Kritiska regler ovan ska fungera utan att runtime måste läsa dokumentet.
+
+
+## Operativ kärna
+
+Läs strukturerad status före progression. Arbeta med en avgränsad fas eller ett avgränsat mål, samla evidens före strategisk härledning och verifiera relevant kvalitetsgrind innan status uppdateras. Vid failing validering ska korrigering prioriteras före nästa ordinarie steg.
+
+### Auktoritativ status
+
+Projektets strukturerade status går före chattminne. Markera inte ett steg eller en analysfas som klar enbart för att en artefakt har producerats; relevanta verifieringar ska också ha passerat.

@@ -1,14 +1,14 @@
-# Runtime-paritetsrapport – Chat ZIP och Custom GPT
+# Runtime-paritetsrapport – GPT Byggaren 1.5
 
 ## Slutsats
 
-**Resultat: PASS.** Chat ZIP och Custom GPT representerar samma GPT på beteendenivå. Inga blockerande beteendeskillnader har identifierats.
+**Resultat: PASS för aktiva runtimes.** Chat ZIP och Custom GPT representerar samma GPT på beteendenivå. Alla fem registrerade runtimes är nu explicit bedömda enligt GPT Byggaren 1.5.
 
 Chat ZIP är den fullständiga runtime-representationen och använder canonical instruktion byte-identiskt. Custom GPT är en kompilerad representation som behåller kritiska beteendekontrakt inom plattformens instruktionsgräns.
 
 ## Paritetsmodell
 
-Paritet bedöms inte som textuell identitet mellan runtime-formaten. Den bedöms i fyra lager:
+Paritet bedöms inte som textuell identitet mellan runtime-formaten. GPT Byggaren 1.5 jämför fem kontraktskategorier: **behavior, capability, artifact, workspace_state och tool**. För de två aktiva runtimes används dessutom följande konkreta kontrollager:
 
 1. **Identitet och uppdrag** – samma roll, målgrupp och slutprodukt.
 2. **Kritiskt beteende** – samma research-, käll-, evidens-, fasgrinds-, härlednings-, guardrail- och rapportregler.
@@ -88,3 +88,20 @@ Ingen av dessa avvikelser ändrar GPT:ns avsedda strategimetod eller guardrails.
 ## Kvalitetsbedömning
 
 Runtime-pariteten bedöms som tillräcklig för nästa fas. Projektet kan gå vidare till project hygiene och dokumentationsgranskning utan korrigerande runtime-arbete.
+
+
+## GPT Byggaren 1.5 – registrerade runtimes
+
+| Runtime | Suitability | Aktiv som standard | Bedömning |
+| --- | --- | --- | --- |
+| ChatGPT Chat | ready | Ja | Fullt stöd för webbresearch, filer och portabelt tillstånd. |
+| ChatGPT Custom | reduced | Ja | Kärnflödet stöds; research- och filfunktioner beror på aktiverade plattformsverktyg. |
+| Claude Projects | reduced | Nej | Instruktion/Knowledge kan paketeras men workspace och deterministisk verifiering är begränsad. |
+| OpenCode | reduced | Nej | Workspace/lokal exekvering är starkt, men webbresearch och källparitet är ännu inte verifierad. |
+| OpenAI Plugin | reduced | Nej | Skills/referenser kan paketeras men hela research-/stateflödet realiseras inte av Plugin v1. |
+
+De tre reducerade runtimes får inte aktiveras enbart för att en teknisk distribution går att bygga. För IT-strategen krävs verifierad **research- och källparitet** innan de kan bli aktiva peer runtimes.
+
+## Release gate
+
+`scripts/validate-runtime-parity.py` verifierar nu både den befintliga Chat/Custom-beteendepariteten och 1.5-registreringen för alla fem runtimes. `scripts/validate-release-readiness.py` behandlar samma runtimebeslut och de aktiva runtime-kontrakten som blockerande releasekrav.
