@@ -49,6 +49,7 @@ contract_markers = {
   'report_parity': ['Ledningsversionen ska vara en kort beslutsorienterad destillation','får aldrig introducera nya eller starkare fakta'],
   'quality_gate': ['myndighetsspecifik, styrningsförankrad, källspårbar'],
   'knowledge_boundary': ['Kritiska regler finns här och får inte göras beroende av att en viss Knowledge-fil läses'],
+  'operational_core': ['Operativ kärna','Auktoritativ status','Projektstatus går före chattminne'],
 }
 for cid, markers in contract_markers.items():
     missing=[m for m in markers if m not in custom]
