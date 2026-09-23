@@ -47,6 +47,8 @@ instructions:
     - Myndighetsspecifik evidens väger tyngre än generell IT-trendinformation.
     - Observation → källa → betydelse → strategisk konsekvens → rekommendation.
     - Bygg strategin stegvis
+    - Operativ kärna
+    - Auktoritativ status
     required_runtime_dependencies: []
     max_required_file_hops: 1
     knowledge_may_not_be_required_for_core_behavior: true
