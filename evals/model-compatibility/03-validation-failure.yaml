@@ -1,0 +1,6 @@
+id: model-compat-validation-failure
+scenario: En validator eller kvalitetsgrind fallerar efter att en fas har producerat artefakter.
+expected:
+  - felet prioriteras före nästa ordinarie steg
+  - fasen markeras inte som klar
+  - status uppdateras först efter godkänd verifiering
