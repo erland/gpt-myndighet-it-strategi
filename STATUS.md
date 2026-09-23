@@ -2,22 +2,22 @@
 
 ## Aktuell status
 
-**PÅGÅR – migrering till GPT Byggaren 1.5.0, steg 34.**
+**PÅGÅR – migrering till GPT Byggaren 1.5.0, steg 35.**
 
-Den stabila domänversionen **0.1.0** är fortsatt baslinje. Steg 33 är verifierat utan regression i research-, härlednings- eller end-to-end-flödet.
+Den stabila domänversionen **0.1.0** är fortsatt baslinje. Steg 33–34 är verifierade utan regression i research-, härlednings- eller end-to-end-flödet.
 
-## Verifierat i steg 33
+## Verifierat i steg 34
 
-- plattformsneutrala capability-, artifact-, workspace/state- och tool-kontrakt
-- stateful/research-heavy modellrobust profil
-- operativ kärna och auktoritativ status
-- fyra modellkompatibilitetsscenarier
-- bedömning av samtliga fem registrerade runtimes
-- Chat-runtime fortsatt byte-identisk med canonical
-- befintlig full CI-kedja: PASS
+- Custom GPT innehåller nu `Operativ kärna` och `Auktoritativ status`
+- Custom GPT-instruktion: **7 990 / 8 000 tecken**
+- befintliga semantiska kontraktsmarkörer bevarade
+- Chat och Custom GPT har explicita 1.5-runtime-kontrakt
+- buildscript kräver runtime-kontrakten
+- parity-test blockerar om den nya 1.5-kärnan tappas
+- full CI-kedja: PASS
 
 ## Nästa rekommenderade steg
 
-**34 – Anpassa distributionsmotorn till 1.5.**
+**35 – Generaliserad runtime parity och release readiness.**
 
-Särskilt ska Custom GPT-kompileringen bevara den nya operativa kärnan trots plattformsgränsen på 8 000 tecken. OpenCode aktiveras inte innan research- och källparitet kan verifieras.
+Alla fem registrerade runtimes ska bedömas i 1.5-paritetsmodellen. Chat och Custom GPT är aktiva; Claude Projects, OpenCode och OpenAI Plugin ska fortsatt vara explicit bedömda och inte aktiveras utan verifierad research- och källparitet.
