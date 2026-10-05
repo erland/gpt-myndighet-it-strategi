@@ -56,6 +56,15 @@ jobs:
       - name: Build Custom GPT ZIP
         run: python scripts/build-custom-gpt.py
 
+      - name: Build OpenAI Plugin ZIP
+        run: python scripts/build-openai-plugin.py
+
+      - name: Validate OpenAI Plugin ZIP
+        shell: bash
+        run: |
+          VERSION="$(cat VERSION)"
+          python scripts/validate-openai-plugin.py "dist/it-strategen-myndigheter-openai-plugin-${VERSION}.zip"
+
       - name: Validate distribution artifacts
         shell: bash
         run: |
@@ -65,10 +74,14 @@ jobs:
           test -s "dist/it-strategen-myndigheter-chat-${VERSION}.zip.sha256"
           test -s "dist/it-strategen-myndigheter-custom-gpt-${VERSION}.zip"
           test -s "dist/it-strategen-myndigheter-custom-gpt-${VERSION}.zip.sha256"
+          test -s "dist/it-strategen-myndigheter-openai-plugin-${VERSION}.zip"
+          test -s "dist/it-strategen-myndigheter-openai-plugin-${VERSION}.zip.sha256"
           unzip -t "dist/it-strategen-myndigheter-chat-${VERSION}.zip"
           unzip -t "dist/it-strategen-myndigheter-custom-gpt-${VERSION}.zip"
+          unzip -t "dist/it-strategen-myndigheter-openai-plugin-${VERSION}.zip"
           (cd dist && sha256sum -c "it-strategen-myndigheter-chat-${VERSION}.zip.sha256")
           (cd dist && sha256sum -c "it-strategen-myndigheter-custom-gpt-${VERSION}.zip.sha256")
+          (cd dist && sha256sum -c "it-strategen-myndigheter-openai-plugin-${VERSION}.zip.sha256")
 
       - name: Upload runtime artifacts
         uses: actions/upload-artifact@v4
