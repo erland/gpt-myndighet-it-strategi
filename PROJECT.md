@@ -36,6 +36,7 @@ GPT:n tar i första hand fram strategisk inriktning. Den ska inte utan särskild
 
 - Chat ZIP
 - Custom GPT
+- OpenAI Plugin
 - Projekt-ZIP
 
 Alla distributioner ska härledas från samma canonical beteendekontrakt.
@@ -43,7 +44,7 @@ Alla distributioner ska härledas från samma canonical beteendekontrakt.
 
 ## Runtime-paritet
 
-Chat ZIP och Custom GPT ska ha samma strategiska beslutslogik trots olika distributionsformat. GPT Byggaren 1.5 registrerar dessutom Claude Projects, OpenCode och OpenAI Plugin som peer candidates. För detta research-heavy projekt är endast Chat och Custom GPT aktiva; övriga förblir reducerade/inaktiva tills research- och källparitet kan verifieras. Accepterade plattformsskillnader dokumenteras i `docs/runtime-parity-report.md`; blockerande beteendedrift är inte tillåten.
+Chat ZIP, Custom GPT och OpenAI Plugin ska bära samma strategiska beslutslogik trots olika distributionsformat. OpenAI Plugin är aktiv som skills-first `ready_runtime_dependent` peer-runtime med required host webbresearch, filåtkomst och persistent state. Claude Projects och OpenCode förblir reducerade/inaktiva tills research- och källparitet kan verifieras. Accepterade plattformsskillnader dokumenteras i `docs/runtime-parity-report.md`; blockerande beteendedrift är inte tillåten.
 
 
 ## Steg 26 – Project hygiene och dokumentationsgranskning
@@ -72,7 +73,7 @@ Chat ZIP och Custom GPT ska ha samma strategiska beslutslogik trots olika distri
 **Status:** Klar
 
 - Release-versionen kommer från GitHub Release-taggen.
-- Projekt-, Chat- och Custom GPT-ZIP byggs i staged kopia.
+- Projekt-, Chat-, Custom GPT- och OpenAI Plugin-ZIP byggs i staged kopia.
 - SHA-256-checksummor skapas och verifieras.
 
 ## Steg 29 – Release readiness
@@ -106,6 +107,6 @@ Steg 31 har verifierat metoden mot Skatteverket, Mediemyndigheten, Läkemedelsve
 - Stable release-dokumentation finns i `docs/stable-release-report-0.1.0.md` och `docs/release-notes-0.1.0.md`.
 
 
-## GPT Byggaren 1.5-migrering
+## GPT Byggaren 1.5.1-migrering
 
 Migreringssteg 33–35 är verifierade. Projektet har nu plattformsneutrala capability-, artifact-, workspace/state- och tool-kontrakt, stateful modellrobust progression, explicita runtime-kontrakt för de aktiva distributionerna samt generaliserad runtime parity och release-readiness. Steg 36 slutvaliderar hela migrations- och releasekedjan.
