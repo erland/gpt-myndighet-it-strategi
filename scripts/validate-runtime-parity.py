@@ -95,14 +95,26 @@ for runtime_id in registered_expected:
     check(bool(item.get('reason')),f'{runtime_id} saknar motivering')
     check(item.get('suitability') in {'ready','reduced','not_viable'},f'{runtime_id} har ogiltig suitability')
 
-for runtime_id in ('chatgpt_chat','chatgpt_custom'):
+for runtime_id in ('chatgpt_chat','chatgpt_custom','openai_plugin'):
     check(candidates.get(runtime_id,{}).get('activate_by_default') is True,f'{runtime_id} ska vara aktiv som standard')
-for runtime_id in ('claude_project','opencode','openai_plugin'):
+for runtime_id in ('claude_project','opencode'):
     check(candidates.get(runtime_id,{}).get('activate_by_default') is False,f'{runtime_id} ska inte vara aktiv som standard')
     check(candidates.get(runtime_id,{}).get('suitability') == 'reduced',f'{runtime_id} ska vara bedömd som reduced i denna migrering')
+check(candidates.get('openai_plugin',{}).get('suitability') == 'ready','openai_plugin ska vara ready')
 
 check(project_cfg.get('runtime',{}).get('chat_zip',{}).get('enabled') is True,'Chat ZIP ska vara enabled')
 check(project_cfg.get('runtime',{}).get('custom_gpt',{}).get('enabled') is True,'Custom GPT ska vara enabled')
+plugin_cfg=project_cfg.get('runtime',{}).get('openai_plugin',{})
+check(plugin_cfg.get('enabled') is True,'OpenAI Plugin ska vara enabled')
+check(plugin_cfg.get('mode')=='skills_first','OpenAI Plugin mode avviker')
+check(plugin_cfg.get('compatibility')=='ready_runtime_dependent','OpenAI Plugin compatibility avviker')
+check(plugin_cfg.get('web_dependency')=='required_host_runtime','OpenAI Plugin web dependency avviker')
+check(plugin_cfg.get('persistent_state')=='required_host_runtime','OpenAI Plugin persistent state avviker')
+check(plugin_cfg.get('state_authority')=='workspace_file','OpenAI Plugin state authority avviker')
+check(plugin_cfg.get('state_path')=='project-status.yaml','OpenAI Plugin state path avviker')
+check(plugin_cfg.get('conversation_fallback') is False,'OpenAI Plugin conversation fallback måste vara false')
+check(plugin_cfg.get('mcp_generated') is False,'OpenAI Plugin får inte generera MCP')
+check(plugin_cfg.get('script_resources')=='none','OpenAI Plugin får inte paketera scripts')
 
 # Runtime-kontrakt för aktiva runtimes måste finnas och peka på rätt adapter.
 check(chat_contract.get('runtime_id')=='chatgpt_chat','Chat runtime-contract har fel runtime_id')
@@ -129,8 +141,8 @@ result={
   'knowledge_files_custom':len(custom_k),
   'registered_runtimes':sorted(registered),
   'compared_categories':sorted(categories),
-  'active_runtimes':['chatgpt_chat','chatgpt_custom'],
-  'assessed_inactive_runtimes':['claude_project','opencode','openai_plugin'],
+  'active_runtimes':['chatgpt_chat','chatgpt_custom','openai_plugin'],
+  'assessed_inactive_runtimes':['claude_project','opencode'],
   'errors':errors,
   'accepted_platform_differences':notes,
 }
