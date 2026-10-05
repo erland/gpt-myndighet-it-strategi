@@ -16,12 +16,13 @@ Den strategiska huvudkedjan är:
 
 ## Distributioner
 
-Projektet har två aktiva och verifierade runtime-format från samma canonical kontrakt:
+Projektet har tre aktiva runtime-format från samma canonical kontrakt:
 
 - **Chat ZIP** – full canonical instruktion, Knowledge och JSON Schemas.
 - **Custom GPT** – kompilerad instruktion och kuraterad Knowledge inom plattformsgränserna.
+- **OpenAI Plugin** – skills-first peer-runtime med canonical beteende, Knowledge, operational policy och strukturerade JSON Schemas.
 
-Runtime-pariteten följer GPT Byggaren 1.5 och omfattar fem registrerade runtimes. Chat och Custom GPT är aktiva; Claude Projects, OpenCode och OpenAI Plugin är bedömda men inaktiva tills research- och källparitet kan verifieras. Källorna för distributionerna finns under `distributions/`; genererade ZIP-filer byggs med skripten i `scripts/` och ska inte lagras i projektets `dist/`.
+Runtime-pariteten följer GPT Byggaren 1.5.1 och omfattar fem registrerade runtimes. Chat, Custom GPT och OpenAI Plugin är aktiva; Claude Projects och OpenCode förblir reducerade/inaktiva. Pluginen är `ready_runtime_dependent`: aktuell webbresearch, filåtkomst och persistent state tillhandahålls av hosten. Källorna för distributionerna finns under `distributions/`; genererade ZIP-filer byggs med skripten i `scripts/` och ska inte lagras i projektets `dist/`.
 
 ## Tester och validering
 
@@ -46,7 +47,7 @@ python3 scripts/validate-runtime-parity.py
 
 ## Continuous integration
 
-`.github/workflows/ci.yml` kör projektlint, schemas, research-/källtester, strategisk härledning, end-to-end, runtime-paritet och source hygiene. Därefter byggs Chat ZIP och Custom GPT ZIP, vars CRC och SHA-256 verifieras innan de laddas upp som GitHub Actions-artifacts. Samma validatorer och build-skript kan köras lokalt.
+`.github/workflows/ci.yml` kör projektlint, schemas, research-/källtester, strategisk härledning, end-to-end, runtime-paritet och source hygiene. Därefter byggs Chat ZIP, Custom GPT ZIP och OpenAI Plugin ZIP, vars CRC/SHA-256 och pluginstruktur verifieras innan de laddas upp som GitHub Actions-artifacts. Samma validatorer och build-skript kan köras lokalt.
 
 ## Build
 
@@ -59,7 +60,7 @@ Byggartefakter skapas under `dist/`, som är genererad och ignorerad.
 
 ## Utvecklingsstatus
 
-**Steg 1–36 är verifierade. Version 0.1.0 är fortsatt stabil baslinje och migreringen till GPT Byggaren 1.5.0 är klar.** Pilotgranskningen från `0.1.0-rc.2` är införlivad och hela kvalitetsgrinden passerar utan blockerande fel eller varningar. Se:
+**Steg 1–36 är verifierade. Version 0.1.0 är fortsatt stabil baslinje och baslinjen är migrerad till GPT Byggaren 1.5.1.** Pilotgranskningen från `0.1.0-rc.2` är införlivad och hela kvalitetsgrinden passerar utan blockerande fel eller varningar. Se:
 
 - `project-status.yaml` för maskinläsbar status,
 - `STATUS.md` för kort mänsklig status,
@@ -70,7 +71,7 @@ Byggartefakter skapas under `dist/`, som är genererad och ignorerad.
 
 ## Release-build
 
-GitHub Release-workflowet i `.github/workflows/release.yml` använder release-taggen som versionskälla och kör `scripts/build-release.py`. Det producerar projekt-ZIP, Chat ZIP, Custom GPT ZIP, individuella `.sha256`-filer och `SHA256SUMS.txt`. Vid en publicerad GitHub Release bifogas artefakterna automatiskt till releasen. Workflowet kan även köras manuellt för en befintlig tagg.
+GitHub Release-workflowet i `.github/workflows/release.yml` använder release-taggen som versionskälla och kör `scripts/build-release.py`. Det producerar projekt-ZIP, Chat ZIP, Custom GPT ZIP, OpenAI Plugin ZIP, individuella `.sha256`-filer, `SHA256SUMS.txt` och `DELIVERY-MANIFEST.json`. Vid en publicerad GitHub Release bifogas artefakterna automatiskt till releasen. Workflowet kan även köras manuellt för en befintlig tagg.
 
 
 ## Stabil release
