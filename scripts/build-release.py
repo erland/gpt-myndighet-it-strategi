@@ -126,6 +126,7 @@ def main() -> None:
         run([sys.executable, "scripts/build-chat-zip.py"], stage)
         run([sys.executable, "scripts/build-custom-gpt.py"], stage)
         run([sys.executable, "scripts/build-openai-plugin.py", "--version", version], stage)
+        run([sys.executable, "scripts/validate-openai-plugin.py", f"dist/it-strategen-myndigheter-openai-plugin-{version}.zip"], stage)
 
         chat = stage / "dist" / f"it-strategen-myndigheter-chat-{version}.zip"
         custom = stage / "dist" / f"it-strategen-myndigheter-custom-gpt-{version}.zip"
