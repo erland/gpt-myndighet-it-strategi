@@ -57,15 +57,17 @@ if categories != categories_expected:
     runtime_gate_errors.append('runtime parity categories differ from GPT Byggaren 1.5 set')
 if set(candidates) != registered_expected:
     runtime_gate_errors.append('not all registered runtimes have an assessment')
-for runtime_id in ('chatgpt_chat','chatgpt_custom'):
+for runtime_id in ('chatgpt_chat','chatgpt_custom','openai_plugin'):
     if candidates.get(runtime_id,{}).get('activate_by_default') is not True:
         runtime_gate_errors.append(f'{runtime_id} must be active by default')
-for runtime_id in ('claude_project','opencode','openai_plugin'):
+for runtime_id in ('claude_project','opencode'):
     item = candidates.get(runtime_id,{})
     if item.get('activate_by_default') is not False:
         runtime_gate_errors.append(f'{runtime_id} must remain inactive')
     if item.get('suitability') != 'reduced':
         runtime_gate_errors.append(f'{runtime_id} must be assessed as reduced')
+if candidates.get('openai_plugin',{}).get('suitability') != 'ready':
+    runtime_gate_errors.append('openai_plugin must be assessed as ready')
 for path, runtime_id in (
     ('distributions/chat/runtime/runtime-contract.json','chatgpt_chat'),
     ('distributions/custom-gpt/runtime/runtime-contract.json','chatgpt_custom'),
@@ -85,8 +87,8 @@ checks.append({
     "result":"PASS" if not runtime_gate_errors else "FAIL",
     "details":runtime_gate_errors or {
         "registered":sorted(registered),
-        "active":["chatgpt_chat","chatgpt_custom"],
-        "assessed_inactive":["claude_project","opencode","openai_plugin"],
+        "active":["chatgpt_chat","chatgpt_custom","openai_plugin"],
+        "assessed_inactive":["claude_project","opencode"],
         "categories":sorted(categories),
     },
 })
@@ -96,6 +98,10 @@ if runtime_gate_errors:
 # Runtime builds
 run('chat_zip_build', [sys.executable, 'scripts/build-chat-zip.py'])
 run('custom_gpt_build', [sys.executable, 'scripts/build-custom-gpt.py'])
+run('openai_plugin_build', [sys.executable, 'scripts/build-openai-plugin.py'])
+plugin_path=ROOT/'dist'/f"it-strategen-myndigheter-openai-plugin-{(ROOT/'VERSION').read_text(encoding='utf-8').strip()}.zip"
+if plugin_path.exists():
+    run('openai_plugin_validation', [sys.executable, 'scripts/validate-openai-plugin.py', str(plugin_path)])
 
 # Release workflow simulation from a release tag.
 with tempfile.TemporaryDirectory(prefix='release-readiness-') as td:
@@ -106,7 +112,9 @@ with tempfile.TemporaryDirectory(prefix='release-readiness-') as td:
             out/'it-strategen-myndigheter-project-0.1.0-rc.1.zip',
             out/'it-strategen-myndigheter-chat-0.1.0-rc.1.zip',
             out/'it-strategen-myndigheter-custom-gpt-0.1.0-rc.1.zip',
+            out/'it-strategen-myndigheter-openai-plugin-0.1.0-rc.1.zip',
             out/'SHA256SUMS.txt',
+            out/'DELIVERY-MANIFEST.json',
         ]
         missing = [str(p.name) for p in expected if not p.exists()]
         if missing:
@@ -120,8 +128,11 @@ with tempfile.TemporaryDirectory(prefix='release-readiness-') as td:
                 digest, filename = line.split(None, 1)
                 sums[filename.strip()] = digest
             bad=[]
-            for p in expected[:3]:
+            for p in expected[:4]:
                 if sums.get(p.name) != sha256(p): bad.append(p.name)
+            delivery=json.loads((out/'DELIVERY-MANIFEST.json').read_text(encoding='utf-8'))
+            if {x.get('type') for x in delivery.get('artifacts',[])} != {'project_zip','chat_zip','custom_gpt_zip','plugin_zip'}:
+                bad.append('DELIVERY-MANIFEST.json')
             checks.append({"name":"release_checksums","result":"PASS" if not bad else "FAIL","details":bad})
             if bad: errors.append('release checksum mismatch')
 
