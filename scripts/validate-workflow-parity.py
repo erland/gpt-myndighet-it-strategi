@@ -21,6 +21,8 @@ required_ci_commands = [
     "python scripts/validate-hygiene.py",
     "python scripts/build-chat-zip.py",
     "python scripts/build-custom-gpt.py",
+    "python scripts/build-openai-plugin.py",
+    "python scripts/validate-openai-plugin.py",
     "python scripts/validate-release-readiness.py",
 ]
 for command in required_ci_commands:
@@ -37,6 +39,8 @@ for script in [
     "scripts/validate-hygiene.py",
     "scripts/build-chat-zip.py",
     "scripts/build-custom-gpt.py",
+    "scripts/build-openai-plugin.py",
+    "scripts/validate-openai-plugin.py",
 ]:
     if script not in build_release:
         errors.append(f"release builder missing script: {script}")
@@ -47,6 +51,10 @@ if "python scripts/build-release.py" not in release:
     errors.append("release workflow does not invoke build-release.py")
 if "SHA256SUMS.txt" not in release:
     errors.append("release workflow does not verify/publish checksum manifest")
+if "DELIVERY-MANIFEST.json" not in build_release:
+    errors.append("release builder does not create delivery manifest")
+if "openai-plugin" not in build_release:
+    errors.append("release builder does not include OpenAI Plugin artifact")
 
 if errors:
     for error in errors:
