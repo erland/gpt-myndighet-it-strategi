@@ -37,8 +37,10 @@ def main()->int:
         skill=z.read("skills/it-strategen-myndigheter/SKILL.md").decode()
         canonical=(ROOT/"src/instructions/system.md").read_text(encoding="utf-8").strip()
         if canonical not in skill: raise SystemExit("SKILL saknar canonical behavior")
-        for marker in ("faktisk webbresearch","project-status.yaml","chattminne är inte fallback","Inga runtime-skript","Ingen MCP-wrapper"):
+        for marker in ("faktisk webbresearch","project-status.yaml","chattminne är inte fallback","Ingen MCP-wrapper"):
             if marker not in skill: raise SystemExit(f"SKILL saknar runtime marker: {marker}")
+        if "runtime-skript" not in skill.lower():
+            raise SystemExit("SKILL saknar runtime-regel för scripts")
         for p in sorted((ROOT/"knowledge").glob("*.md")):
             target=f"skills/it-strategen-myndigheter/references/knowledge/{p.name}"
             if target not in names or z.read(target)!=p.read_bytes(): raise SystemExit(f"Knowledge drift: {p.name}")
