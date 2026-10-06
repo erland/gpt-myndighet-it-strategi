@@ -6,7 +6,7 @@ plan:
   path: docs/development-plan.md
   total_steps: 36
 progress:
-  current_phase: maintenance
+  current_phase: plugin_modernization_gpt_builder_1_5_1
   current_step: 36
   last_completed_step: 36
   completed_steps:
@@ -57,10 +57,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: null
-  title: GPT Byggaren 1.5.0-migrering klar
-  reason: Samtliga migrationssteg 33–36 är verifierade. Full regression,
-    runtime parity, release readiness och CI/release-paritet passerar.
+  recommended: validate_and_merge
+  title: Validera GPT Byggaren 1.5.1 OpenAI Plugin
+  reason: OpenAI Plugin är implementerad som ready_runtime_dependent peer-runtime enligt GPT Byggaren 1.5.1 och ska verifieras av aktuell PR-CI.
 resume:
   supported: true
   required_files:
@@ -69,8 +68,7 @@ resume:
   - docs/development-plan.md
   - STATUS.md
   - PROJECT.md
-  human_readable_status: Steg 1–36 är verifierade. Migreringen till GPT Byggaren
-    1.5.0 är klar och projektet är redo att mergeas.
+  human_readable_status: Steg 1–36 är fortsatt baslinje. GPT Byggaren 1.5.1-pluginjusteringen är implementerad och valideras i aktuell PR.
 validation:
   last_result: pass
   checks:

@@ -2,7 +2,7 @@
 
 ## Aktuell status
 
-**PASS – migreringen till GPT Byggaren 1.5.0 är klar.**
+**GPT Byggaren 1.5.1 – OpenAI Plugin-justering implementerad och valideras i aktuell PR.**
 
 Den stabila domänversionen **0.1.0** är fortsatt baslinje och strategimetoden är bevarad.
 
@@ -16,6 +16,7 @@ Den stabila domänversionen **0.1.0** är fortsatt baslinje och strategimetoden 
 - end-to-end: PASS
 - Chat ZIP: PASS
 - Custom GPT: PASS
+- OpenAI Plugin: valideras i aktuell PR
 - runtime parity för fem registrerade runtimes: PASS
 - release-readiness med RC-simulering: PASS
 - CI/release workflow parity: PASS
@@ -26,12 +27,12 @@ Den stabila domänversionen **0.1.0** är fortsatt baslinje och strategimetoden 
 Aktiva:
 - ChatGPT Chat
 - ChatGPT Custom
+- OpenAI Plugin – ready / ready_runtime_dependent
 
 Bedömda men inaktiva tills research- och källparitet verifierats:
 - Claude Projects
 - OpenCode
-- OpenAI Plugin
 
 ## Nästa rekommenderade utvecklingsområde
 
-Inga blockerande migrationssteg återstår. Nästa produktutveckling kan återgå till **0.2.x – verklig användningsutvärdering och rapportexport**.
+Pluginjusteringen verifieras av aktuell PR-CI inklusive web/state-fallbacks, pluginpaket, release readiness och delivery metadata. Efter grön CI kan projektet återgå till **0.2.x – verklig användningsutvärdering och rapportexport**.

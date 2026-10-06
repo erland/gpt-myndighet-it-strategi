@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import os
 import re
 import shutil
@@ -46,6 +47,7 @@ def sync_version(root: Path, version: str) -> None:
     gp["project"]["version"] = version
     gp["runtime"]["chat_zip"]["artifact"] = f"dist/it-strategen-myndigheter-chat-{version}.zip"
     gp["runtime"]["custom_gpt"]["artifact"] = f"dist/it-strategen-myndigheter-custom-gpt-{version}.zip"
+    gp["runtime"]["openai_plugin"]["artifact"] = f"dist/it-strategen-myndigheter-openai-plugin-{version}.zip"
     gp["release"]["github"]["enabled"] = True
     gp["release"]["github"]["status"] = "implemented"
     gp_path.write_text(yaml.safe_dump(gp, allow_unicode=True, sort_keys=False), encoding="utf-8")
@@ -123,24 +125,50 @@ def main() -> None:
             run([sys.executable, script], stage)
         run([sys.executable, "scripts/build-chat-zip.py"], stage)
         run([sys.executable, "scripts/build-custom-gpt.py"], stage)
+        run([sys.executable, "scripts/build-openai-plugin.py", "--version", version], stage)
+        run([sys.executable, "scripts/validate-openai-plugin.py", f"dist/it-strategen-myndigheter-openai-plugin-{version}.zip"], stage)
 
         chat = stage / "dist" / f"it-strategen-myndigheter-chat-{version}.zip"
         custom = stage / "dist" / f"it-strategen-myndigheter-custom-gpt-{version}.zip"
-        if not chat.is_file() or not custom.is_file():
+        plugin = stage / "dist" / f"it-strategen-myndigheter-openai-plugin-{version}.zip"
+        if not chat.is_file() or not custom.is_file() or not plugin.is_file():
             fail("runtime-build saknar förväntad artefakt")
 
         out_chat = output_dir / chat.name
         out_custom = output_dir / custom.name
+        out_plugin = output_dir / plugin.name
         shutil.copy2(chat, out_chat)
         shutil.copy2(custom, out_custom)
+        shutil.copy2(plugin, out_plugin)
 
         project = output_dir / f"it-strategen-myndigheter-project-{version}.zip"
         build_project_zip(stage, project)
 
-        artifacts = [project, out_chat, out_custom]
+        artifacts = [project, out_chat, out_custom, out_plugin]
         checksum_files = [write_checksum(p) for p in artifacts]
         sums = output_dir / "SHA256SUMS.txt"
         sums.write_text("".join(f"{sha256(p)}  {p.name}\n" for p in artifacts), encoding="utf-8")
+        delivery = output_dir / "DELIVERY-MANIFEST.json"
+        delivery.write_text(json.dumps({
+            "schema_version": 1,
+            "version": version,
+            "artifacts": [
+                {"type": t, "file": p.name, "sha256": sha256(p), "bytes": p.stat().st_size}
+                for t,p in [
+                    ("project_zip", project),
+                    ("chat_zip", out_chat),
+                    ("custom_gpt_zip", out_custom),
+                    ("plugin_zip", out_plugin),
+                ]
+            ],
+            "runtime_status": {
+                "chatgpt_chat": "ready_active",
+                "chatgpt_custom": "reduced_active",
+                "openai_plugin": "ready_runtime_dependent",
+                "claude_project": "reduced_inactive",
+                "opencode": "reduced_inactive",
+            },
+        }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
         for p in artifacts:
             with zipfile.ZipFile(p) as zf:
